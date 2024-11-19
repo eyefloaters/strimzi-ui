@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FieldReplicas } from "./FieldReplicas";;
+import { FieldReplicas } from "./FieldReplicas";
 
 const meta: Meta<typeof FieldReplicas> = {
   component: FieldReplicas,
@@ -8,15 +8,14 @@ const meta: Meta<typeof FieldReplicas> = {
 export default meta;
 type Story = StoryObj<typeof FieldReplicas>;
 
-
 export const Default: Story = {
   args: {
     replicas: 3,
     maxReplicas: 5,
     showErrors: false,
     backendError: false,
-  }
-}
+  },
+};
 
 export const InvalidState: Story = {
   args: {
@@ -24,6 +23,5 @@ export const InvalidState: Story = {
     maxReplicas: 5,
     showErrors: true,
     backendError: "Exceeded maximum replicas",
-  }
-}
-
+  },
+};

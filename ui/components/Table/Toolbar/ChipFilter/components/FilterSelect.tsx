@@ -3,12 +3,12 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import type { SelectType } from "../types";
 
-export function FilterSelect({
+export function  FilterSelect({
   label,
   chips,
   options,
   onToggle,
-}: Pick<SelectType<any>, "chips" | "options" | "onToggle"> & {
+}: Pick<SelectType<any>, "chips" | "options" | "onToggle"> & {       
   label: string;
 }) {
   const t = useTranslations();

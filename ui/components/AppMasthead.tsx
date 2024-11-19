@@ -1,23 +1,31 @@
 "use client";
 import { TechPreviewPopover } from "@/components/TechPreviewPopover";
 import {
+  Brand,
   Button,
   Label,
   Masthead,
+  MastheadBrand,
   MastheadContent,
+  MastheadLogo,
   MastheadMain,
   MastheadToggle,
   PageToggleButton,
+  ToggleGroup,
+  ToggleGroupItem,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from "@/libs/patternfly/react-core";
-import { BarsIcon, QuestionCircleIcon } from "@/libs/patternfly/react-icons";
+import {
+  BarsIcon,
+  MoonIcon,
+  QuestionCircleIcon,
+  SunIcon,
+} from "@/libs/patternfly/react-icons";
 import { FeedbackModal } from "@patternfly/react-user-feedback";
-import { User } from "next-auth";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useState } from "react";
 import { useAppLayout } from "./AppLayoutProvider";
 import { UserDropdown } from "./UserDropdown";
@@ -32,35 +40,46 @@ export function AppMasthead({
   const t = useTranslations();
   const { toggleSidebar } = useAppLayout();
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
   const openFeedbackModal = () => {
     setIsFeedbackModalOpen(true);
   };
   const closeFeedbackModal = () => {
     setIsFeedbackModalOpen(false);
   };
+
+  const toggleDarkMode = (value: boolean) => {
+    setIsDarkMode(value);
+    document
+      .getElementsByTagName("html")[0]
+      .classList.toggle("pf-v6-theme-dark");
+  };
+
   return (
     <>
       <Masthead>
-        {showSidebarToggle && (
-          <MastheadToggle>
-            <PageToggleButton
-              variant="plain"
-              aria-label={t("AppMasthead.global_navigation")}
-              onClick={toggleSidebar}
-            >
-              <BarsIcon />
-            </PageToggleButton>
-          </MastheadToggle>
-        )}
         <MastheadMain>
-          <Link href={"/"} className={"pf-v5-c-masthead_brand"}>
-            <img
-              className={"pf-v5-c-brand"}
-              src={"/full-logo.svg"}
-              alt={t("common.title")}
-              style={{ height: 48 }}
-            />
-          </Link>
+          {showSidebarToggle && (
+            <MastheadToggle>
+              <PageToggleButton
+                variant="plain"
+                aria-label={t("AppMasthead.global_navigation")}
+                onClick={toggleSidebar}
+              >
+                <BarsIcon />
+              </PageToggleButton>
+            </MastheadToggle>
+          )}
+          <MastheadBrand>
+            <MastheadLogo href="/" target="_blank">
+              <Brand
+                src={"/full-logo.svg"}
+                alt={t("common.title")}
+                heights={{ default: "56px" }}
+              />
+            </MastheadLogo>
+          </MastheadBrand>
         </MastheadMain>
         <MastheadContent>
           <Toolbar
@@ -71,22 +90,39 @@ export function AppMasthead({
           >
             <ToolbarContent id={"masthead-toolbar"}>
               <ToolbarGroup
-                variant="icon-button-group"
-                align={{ default: "alignRight" }}
-                spacer={{ default: "spacerNone", md: "spacerMd" }}
+                variant="action-group"
+                align={{ default: "alignEnd" }}
               >
+                <ToggleGroup className={"pf-v6-u-py-md"}>
+                  <ToggleGroupItem
+                    icon={<SunIcon />}
+                    aria-label="Light mode"
+                    isSelected={!isDarkMode}
+                    onChange={() => {
+                      toggleDarkMode(false);
+                    }}
+                  />
+                  <ToggleGroupItem
+                    icon={<MoonIcon />}
+                    aria-label="Dark mode"
+                    isSelected={isDarkMode}
+                    onChange={() => {
+                      toggleDarkMode(true);
+                    }}
+                  />
+                </ToggleGroup>
                 <ToolbarGroup
-                  variant="icon-button-group"
+                  variant="label-group"
                   visibility={{ default: "hidden", lg: "visible" }}
                 >
                   <ToolbarItem>
                     <TechPreviewPopover>
-                      <Label color={"blue"} isCompact={true}>
+                      <Label color={"blue"}>
                         {t("AppMasthead.tech_preview_label")}
                       </Label>
                     </TechPreviewPopover>
                   </ToolbarItem>
-                  <ToolbarItem>
+                  <ToolbarItem className={"pf-v6-u-py-sm"}>
                     <Button
                       aria-label={t("AppMasthead.help")}
                       variant={"plain"}

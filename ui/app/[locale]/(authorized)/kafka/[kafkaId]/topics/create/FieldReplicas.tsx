@@ -5,8 +5,7 @@ import {
   HelperText,
   HelperTextItem,
   NumberInput,
-  Text,
-  TextContent,
+  Content,
   Title,
 } from "@patternfly/react-core";
 import { useTranslations } from "next-intl";
@@ -26,13 +25,15 @@ export function FieldReplicas({
 }) {
   const t = useTranslations();
   return (
-    < FormSection >
-      <TextContent>
-        <Title headingLevel={"h3"}>{t("CreateTopic.topic_replica_field")}</Title>
-        <Text component={"small"}>
+    <FormSection>
+      <Content>
+        <Title headingLevel={"h3"}>
+          {t("CreateTopic.topic_replica_field")}
+        </Title>
+        <Content component={"small"}>
           {t("CreateTopic.topic_replica_field_description")}
-        </Text>
-      </TextContent>
+        </Content>
+      </Content>
       <FormGroup label="Replicas" isRequired fieldId="topic-replicas">
         <NumberInput
           required
@@ -57,7 +58,7 @@ export function FieldReplicas({
               {t("CreateTopic.topic_replica_helper_text")}
             </HelperTextItem>
             {backendError && (
-              <HelperTextItem isDynamic variant={"error"} component={"li"}>
+              <HelperTextItem variant={"error"} component={"li"}>
                 {backendError}
               </HelperTextItem>
             )}

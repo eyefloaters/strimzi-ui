@@ -94,7 +94,7 @@ export function CreateTopic({
   const formInvalid = error !== undefined;
 
   return (
-    <PageSection type={"wizard"}>
+    <PageSection hasBodyWrapper={false} type={"wizard"}>
       <Wizard title={t("CreateTopic.title")} onClose={() => router.back()}>
         <WizardStep
           name={t("CreateTopic.topic_details")}

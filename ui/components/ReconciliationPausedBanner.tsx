@@ -32,7 +32,7 @@ export function ReconciliationPausedBanner({ kafkaId }: { kafkaId: string }) {
   if (!isReconciliationPaused) return null;
 
   return (
-    <Banner variant="gold">
+    <Banner status="warning">
       <Bullseye>
         <Flex>
           <FlexItem spacer={{ default: "spacerNone" }}>

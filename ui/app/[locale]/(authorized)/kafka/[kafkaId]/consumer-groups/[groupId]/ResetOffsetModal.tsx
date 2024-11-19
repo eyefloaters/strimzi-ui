@@ -1,13 +1,16 @@
 import { ExternalLink } from "@/components/Navigation/ExternalLink";
 import {
   Button,
+  Content,
   List,
   ListItem,
   Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
   ModalVariant,
   Stack,
   StackItem,
-  Text,
 } from "@/libs/patternfly/react-core";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -38,43 +41,47 @@ export function ResetOffsetModal({
 
   return (
     <Modal
-      title={t("consumer_group_must_be_empty")}
-      titleIconVariant="warning"
       isOpen={isResetOffsetModalOpen}
       variant={ModalVariant.medium}
       onClose={onClickClose}
-      actions={[
+    >
+      <ModalHeader
+        title={t("consumer_group_must_be_empty")}
+        titleIconVariant={"warning"}
+      />
+      <ModalBody>
+        <Stack hasGutter>
+          <StackItem>
+            <Content>{t("member_shutdown_helper_text")}</Content>
+          </StackItem>
+          <StackItem>
+            <List>
+              {members.map((member, index) => (
+                <ListItem key={index}>{member}</ListItem>
+              ))}
+            </List>
+          </StackItem>
+          <StackItem>
+            <Content>{t("shutdown_active_members")}</Content>
+          </StackItem>
+          <StackItem>
+            <ExternalLink testId={"learn_to_shutdown_members"} href={""}>
+              {t("learn_to_shutdown_members")}
+            </ExternalLink>
+          </StackItem>
+        </Stack>
+      </ModalBody>
+      <ModalFooter>
         <Button key="close" variant="primary" onClick={onClickClose}>
           {t("close")}
-        </Button>,
+        </Button>
         <Button key="refresh" variant="secondary" onClick={refresh}>
           {t("refresh")}
-        </Button>,
+        </Button>
         <Button key="refresh" variant="link" onClick={onClickClose}>
           {t("cancel")}
-        </Button>,
-      ]}
-    >
-      <Stack hasGutter>
-        <StackItem>
-          <Text>{t("member_shutdown_helper_text")}</Text>
-        </StackItem>
-        <StackItem>
-          <List>
-            {members.map((member, index) => (
-              <ListItem key={index}>{member}</ListItem>
-            ))}
-          </List>
-        </StackItem>
-        <StackItem>
-          <Text>{t("shutdown_active_members")}</Text>
-        </StackItem>
-        <StackItem>
-          <ExternalLink testId={"learn_to_shutdown_members"} href={""}>
-            {t("learn_to_shutdown_members")}
-          </ExternalLink>
-        </StackItem>
-      </Stack>
+        </Button>
+      </ModalFooter>
     </Modal>
   );
 }

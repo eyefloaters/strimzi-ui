@@ -9,6 +9,7 @@ import {
   Card,
   CardBody,
   CardTitle,
+  Content,
   DataList,
   DataListCell,
   DataListItem,
@@ -22,8 +23,6 @@ import {
   Skeleton,
   Stack,
   StackItem,
-  Text,
-  TextContent,
   Title,
 } from "@/libs/patternfly/react-core";
 import { isProductizedBuild } from "@/utils/env";
@@ -43,20 +42,20 @@ export default async function Home() {
 
   return (
     <AppLayout>
-      <PageSection padding={{ default: "noPadding" }} variant={"light"}>
+      <PageSection padding={{ default: "noPadding" }} variant={"default"}>
         <div className={styles.hero}>
           <div>
-            <TextContent>
+            <Content>
               <Title headingLevel={"h1"} size={"2xl"}>
                 {t.rich("homepage.page_header", { product: productName })}
               </Title>
-              <Text className={"pf-v5-u-color-200"}>
+              <Content className={"pf-v6-u-color-200"}>
                 {t("homepage.page_subtitle", {
                   brand: brand,
                   product: productName,
                 })}
-              </Text>
-            </TextContent>
+              </Content>
+            </Content>
           </div>
         </div>
       </PageSection>
@@ -65,15 +64,15 @@ export default async function Home() {
           <StackItem>
             <Card isCompact={true}>
               <CardTitle>
-                <TextContent>
+                <Content>
                   {t.rich("homepage.platform_openshift_cluster")}
-                  <Text component={"small"}>
+                  <Content component={"small"}>
                     <Suspense fallback={<Skeleton width={"200px"} />}>
                       <Number value={allClusters.length} />
                       &nbsp;{t("homepage.connected_kafka_clusters")}
                     </Suspense>
-                  </Text>
-                </TextContent>
+                  </Content>
+                </Content>
               </CardTitle>
               <CardBody>
                 <Suspense fallback={<ClustersTable clusters={undefined} />}>
@@ -89,9 +88,9 @@ export default async function Home() {
                 title={
                   <Level>
                     <LevelItem>
-                      <TextContent>
+                      <Content>
                         {t.rich("homepage.recommended_learning_resources")}
-                      </TextContent>
+                      </Content>
                     </LevelItem>
                   </Level>
                 }
@@ -100,9 +99,9 @@ export default async function Home() {
                     <LevelItem>
                       <Stack>
                         <StackItem>
-                          <TextContent>
+                          <Content>
                             {t.rich("homepage.recommended_learning_resources")}
-                          </TextContent>
+                          </Content>
                         </StackItem>
                         <StackItem>
                           <LabelGroup isCompact>

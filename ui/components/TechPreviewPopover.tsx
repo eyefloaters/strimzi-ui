@@ -13,11 +13,7 @@ export function TechPreviewPopover({
     <Popover
       triggerAction={"hover"}
       headerContent={t("AppLayout.tech_preview_label")}
-      bodyContent={
-        <div>
-          {t("AppLayout.tech_preview_tooltip_description")}
-        </div>
-      }
+      bodyContent={<div>{t("AppLayout.tech_preview_tooltip_description")}</div>}
       footerContent={
         <ExternalLink
           href={"https://redhat.com"}

@@ -1,6 +1,6 @@
 .hero {
     display: grid;
-    padding: var(--pf-v5-global--spacer--lg)
+    padding: var(--pf-v6-global--spacer--lg)
 }
 
 
@@ -8,8 +8,8 @@
     .hero {
         grid-template-columns: 250px auto;
         grid-template-areas: "graphic content";
-        grid-grap: var(--pf-v5-global--spacer--2xl);
-        padding: var(--pf-v5-global--spacer--2xl);
+        grid-grap: var(--pf-v6-global--spacer--2xl);
+        padding: var(--pf-v6-global--spacer--2xl);
     }
 
     .hero::before {

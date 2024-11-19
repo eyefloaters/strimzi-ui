@@ -17,13 +17,10 @@ import {
   Tab,
   Tabs,
   TabTitleText,
-  Text,
-  TextContent,
-  TextVariants,
   Tooltip,
 } from "@/libs/patternfly/react-core";
 import { HelpIcon } from "@/libs/patternfly/react-icons";
-import { ClipboardCopy } from "@patternfly/react-core";
+import { ClipboardCopy, Content } from "@patternfly/react-core";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { allExpanded, defaultStyles, JsonView } from "react-json-view-lite";
@@ -58,9 +55,9 @@ export function MessageDetails({
   return (
     <DrawerPanelContent isResizable={true} minSize={"400px"}>
       <DrawerHead>
-        <TextContent>
-          <Text component={TextVariants.h2}>{t("message")}</Text>
-        </TextContent>
+        <Content>
+          <Content component={"h2"}>{t("message")}</Content>
+        </Content>
         <DrawerActions>
           <DrawerCloseButton onClick={onClose} />
         </DrawerActions>

@@ -8,11 +8,13 @@ import {
   Drawer,
   DrawerContent,
   PageSection,
-  Text,
-  TextContent,
+  Content,
   Tooltip,
 } from "@/libs/patternfly/react-core";
-import { ExclamationTriangleIcon, HelpIcon } from "@/libs/patternfly/react-icons";
+import {
+  ExclamationTriangleIcon,
+  HelpIcon,
+} from "@/libs/patternfly/react-icons";
 import {
   BaseCellProps,
   InnerScrollContainer,
@@ -224,12 +226,12 @@ export function MessagesTable({
                         return (
                           <Cell>
                             <Number value={row.attributes.offset} />
-                            <TextContent>
-                              <Text component={"small"}>
+                            <Content>
+                              <Content component={"small"}>
                                 Partition{" "}
                                 <Number value={row.attributes.partition} />
-                              </Text>
-                            </TextContent>
+                              </Content>
+                            </Content>
                           </Cell>
                         );
                       case "size":
@@ -264,30 +266,39 @@ export function MessagesTable({
                           <Cell>
                             {row.attributes.key ? (
                               <>
-                              <UnknownValuePreview
-                                value={row.attributes.key}
-                                highlight={filterQuery}
-                                onClick={() => {
-                                  setDefaultTab("key");
-                                  onSelectMessage(row);
-                                }}
-                              />
-                              {row.relationships.keySchema && (
-                                <TextContent>
-                                  <Text component={"small"}>
-                                    {row.relationships.keySchema?.meta?.artifactType && (
+                                <UnknownValuePreview
+                                  value={row.attributes.key}
+                                  highlight={filterQuery}
+                                  onClick={() => {
+                                    setDefaultTab("key");
+                                    onSelectMessage(row);
+                                  }}
+                                />
+                                {row.relationships.keySchema && (
+                                  <Content>
+                                    <Content component={"small"}>
+                                      {row.relationships.keySchema?.meta
+                                        ?.artifactType && (
                                         <>
-                                        {row.relationships.keySchema?.meta?.artifactType}
+                                          {
+                                            row.relationships.keySchema?.meta
+                                              ?.artifactType
+                                          }
                                         </>
-                                    )}
-                                    {row.relationships.keySchema?.meta?.errors && (
+                                      )}
+                                      {row.relationships.keySchema?.meta
+                                        ?.errors && (
                                         <>
-                                        <ExclamationTriangleIcon /> { row.relationships.keySchema?.meta?.errors[0].detail }
+                                          <ExclamationTriangleIcon />{" "}
+                                          {
+                                            row.relationships.keySchema?.meta
+                                              ?.errors[0].detail
+                                          }
                                         </>
-                                    )}
-                                  </Text>
-                                </TextContent>
-                              )}
+                                      )}
+                                    </Content>
+                                  </Content>
+                                )}
                               </>
                             ) : (
                               empty
@@ -318,30 +329,39 @@ export function MessagesTable({
                           <Cell>
                             {row.attributes.value ? (
                               <>
-                              <UnknownValuePreview
-                                value={row.attributes.value}
-                                highlight={filterQuery}
-                                onClick={() => {
-                                  setDefaultTab("value");
-                                  onSelectMessage(row);
-                                }}
-                              />
-                              {row.relationships.valueSchema && (
-                                <TextContent>
-                                  <Text component={"small"}>
-                                    {row.relationships.valueSchema?.meta?.artifactType && (
-                                      <>
-                                      {row.relationships.valueSchema?.meta?.artifactType}
-                                      </>
-                                    )}
-                                    {row.relationships.valueSchema?.meta?.errors && (
-                                      <>
-                                      <ExclamationTriangleIcon /> { row.relationships.valueSchema?.meta?.errors[0].detail }
-                                      </>
-                                    )}
-                                  </Text>
-                                </TextContent>
-                              )}
+                                <UnknownValuePreview
+                                  value={row.attributes.value}
+                                  highlight={filterQuery}
+                                  onClick={() => {
+                                    setDefaultTab("value");
+                                    onSelectMessage(row);
+                                  }}
+                                />
+                                {row.relationships.valueSchema && (
+                                  <Content>
+                                    <Content component={"small"}>
+                                      {row.relationships.valueSchema?.meta
+                                        ?.artifactType && (
+                                        <>
+                                          {
+                                            row.relationships.valueSchema?.meta
+                                              ?.artifactType
+                                          }
+                                        </>
+                                      )}
+                                      {row.relationships.valueSchema?.meta
+                                        ?.errors && (
+                                        <>
+                                          <ExclamationTriangleIcon />{" "}
+                                          {
+                                            row.relationships.valueSchema?.meta
+                                              ?.errors[0].detail
+                                          }
+                                        </>
+                                      )}
+                                    </Content>
+                                  </Content>
+                                )}
                               </>
                             ) : (
                               empty
@@ -379,16 +399,19 @@ export function MessagesTable({
               </div>
             </InnerScrollContainer>
           </OuterScrollContainer>
-          <TextContent>
-            <Text component={"small"} className={"pf-v5-u-px-md pf-v5-u-py-sm"}>
+          <Content>
+            <Content
+              component={"small"}
+              className={"pf-v6-u-px-md pf-v6-u-py-sm"}
+            >
               Last updated:{" "}
               <DateTime
                 value={lastUpdated}
                 timeStyle={"medium"}
                 dateStyle={"short"}
               />
-            </Text>
-          </TextContent>
+            </Content>
+          </Content>
         </DrawerContent>
       </Drawer>
       {showColumnsManagement && (

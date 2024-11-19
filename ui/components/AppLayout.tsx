@@ -25,7 +25,9 @@ export function AppLayout({
   const isValidKafkaId = !!kafkaId;
   return (
     <Page
-      header={<AppMasthead username={username} showSidebarToggle={!!sidebar} />}
+      masthead={
+        <AppMasthead username={username} showSidebarToggle={!!sidebar} />
+      }
       sidebar={
         sidebar && (
           <AppSidebar>

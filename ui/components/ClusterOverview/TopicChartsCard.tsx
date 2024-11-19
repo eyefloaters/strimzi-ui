@@ -25,8 +25,8 @@ export function TopicChartsCard({
 }:
   | ({ isLoading: false } & TopicChartsCardProps)
   | ({
-    isLoading: true;
-  } & Partial<{ [key in keyof TopicChartsCardProps]?: undefined }>)) {
+      isLoading: true;
+    } & Partial<{ [key in keyof TopicChartsCardProps]?: undefined }>)) {
   const t = useTranslations();
 
   return (
@@ -42,7 +42,11 @@ export function TopicChartsCard({
         <Flex direction={{ default: "column" }} gap={{ default: "gapLg" }}>
           <b>
             {t("topicMetricsCard.topics_bytes_incoming_and_outgoing")}{" "}
-            <Tooltip content={t("topicMetricsCard.topics_bytes_incoming_and_outgoing_tooltip")}>
+            <Tooltip
+              content={t(
+                "topicMetricsCard.topics_bytes_incoming_and_outgoing_tooltip",
+              )}
+            >
               <HelpIcon />
             </Tooltip>
           </b>

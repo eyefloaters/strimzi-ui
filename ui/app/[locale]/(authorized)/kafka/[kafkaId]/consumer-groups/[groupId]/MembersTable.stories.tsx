@@ -5,7 +5,8 @@ const sampleConsumerGroup = {
   attributes: {
     members: [
       {
-        memberId: "console-datagen-consumer-0-2-f57582e3-523b-4a1e-97a8-02cb2e3b6592",
+        memberId:
+          "console-datagen-consumer-0-2-f57582e3-523b-4a1e-97a8-02cb2e3b6592",
         clientId: "console-datagen-consumer-0-2",
         assignments: [
           {
@@ -89,7 +90,7 @@ const sampleConsumerGroup = {
         lag: 342,
         offset: 3068518,
         logEndOffset: 3068869,
-      }
+      },
     ],
   },
 };

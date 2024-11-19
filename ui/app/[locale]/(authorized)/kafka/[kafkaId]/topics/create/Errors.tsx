@@ -1,24 +1,24 @@
 import { TopicMutateError } from "@/api/topics/schema";
-import { Alert, Text, TextContent } from "@patternfly/react-core";
+import { Alert, Content } from "@patternfly/react-core";
 
 export function Error({ error }: { error: TopicMutateError | "unknown" }) {
   return error !== "unknown" ? (
     error.errors.map((e, idx) => (
       <Alert key={idx} title={e.title} variant={"danger"}>
-        <TextContent>
-          <Text>{e.detail}</Text>
+        <Content>
+          <Content component="p">{e.detail}</Content>
           {e.source?.pointer && (
-            <Text component={"small"}>
+            <Content component={"small"}>
               <strong>Pointer</strong>&nbsp;
               {e.source.pointer}
-            </Text>
+            </Content>
           )}
 
-          <Text component={"small"}>
+          <Content component={"small"}>
             <strong>Error</strong>&nbsp;
             {e.id}
-          </Text>
-        </TextContent>
+          </Content>
+        </Content>
       </Alert>
     ))
   ) : (

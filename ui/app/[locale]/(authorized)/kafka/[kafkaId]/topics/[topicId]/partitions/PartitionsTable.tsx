@@ -221,7 +221,7 @@ export function PartitionsTable({
                       }
                     >
                       <Label
-                        color={"cyan"}
+                        color={"teal"}
                         isCompact={true}
                         icon={<FlagIcon />}
                       >

@@ -1,10 +1,14 @@
-import { Button, Modal, Text, TextContent } from "@/libs/patternfly/react-core";
+import { Button, Modal } from "@/libs/patternfly/react-core";
 import {
+  Content,
   DataList,
   DataListCell,
   DataListCheck,
   DataListControl,
   DataListItemCells,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
 } from "@patternfly/react-core";
 import { DragDropSort } from "@patternfly/react-drag-drop";
 import { useTranslations } from "next-intl";
@@ -96,13 +100,25 @@ export function ColumnsModal({
       title={t("ColumnsModal.title")}
       isOpen={true}
       variant="small"
-      description={
-        <TextContent>
-          <Text component={"p"}>{t("ColumnsModal.description")}</Text>
-        </TextContent>
-      }
       onClose={onCancel}
-      actions={[
+    >
+      <ModalHeader>
+        <Content>
+          <Content component={"p"}>{t("ColumnsModal.description")}</Content>
+        </Content>
+      </ModalHeader>
+      <ModalBody>
+        <DragDropSort
+          items={sortedColumns.map(colToDraggable)}
+          onDrop={(_, newItems) => {
+            setSortedColumns(newItems.map((c) => c.id as Column));
+          }}
+          variant="DataList"
+        >
+          <DataList aria-label={t("ColumnsModal.columns")} isCompact />
+        </DragDropSort>
+      </ModalBody>
+      <ModalFooter>
         <Button
           key="save"
           variant="primary"
@@ -112,21 +128,11 @@ export function ColumnsModal({
           isDisabled={chosenColumns.length === 0}
         >
           {t("ColumnsModal.save")}
-        </Button>,
+        </Button>
         <Button key="cancel" variant="secondary" onClick={onCancel}>
           {t("ColumnsModal.cancel")}
-        </Button>,
-      ]}
-    >
-      <DragDropSort
-        items={sortedColumns.map(colToDraggable)}
-        onDrop={(_, newItems) => {
-          setSortedColumns(newItems.map((c) => c.id as Column));
-        }}
-        variant="DataList"
-      >
-        <DataList aria-label={t("ColumnsModal.columns")} isCompact />
-      </DragDropSort>
+        </Button>
+      </ModalFooter>
     </Modal>
   );
 }

@@ -36,7 +36,9 @@
     "login_button": "Log in",
     "text_content": "The {product} console delivers real-time insights for managing and optimizing your Kafka clusters. Connect and monitor your clusters effortlessly.",
     "footer_text": "To log in, you need to enter your credentials.",
-    "learning_resource": "Learn more about {product}"
+    "learning_resource": "Learn more about {product}",
+    "log_into_a_different_cluster": "Log in to a different cluster",
+    "login_anonymously": "Click to login anonymously"
   },
   "cluster-selector": {
     "subtitle": "Select a cluster"
@@ -168,6 +170,12 @@
       "topic_name": "Name",
       "cluster": "Cluster"
     }
+  },
+  "topic-header": {
+     "messages": "Messages",
+     "partitions": "Partitions",
+     "consumer_groups": "Consumer groups",
+     "configuration": "Configuration"
   },
   "topic-creator": {
     "title": "Create a Kafka topic",
@@ -581,5 +589,10 @@
     "approved_alert": "KafkaRebalance approved!",
     "stopped_alert": "KafkaRebalance has stopped!",
     "refresh_alert": "KafkaRebalance has been refreshed!"
+  },
+  "node-header": {
+    "overveiw": "Overview",
+    "rebalance": "Rebalance",
+    "brokers": "Brokers"
   }
 }

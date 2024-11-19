@@ -15,18 +15,18 @@ test.skip("Home page", async ({ page }) => {
 
   await test.step("Connection details should show URL", async () => {
     // Click on the kebab toggle button
-    await page.click('button[class="pf-v5-c-menu-toggle pf-m-plain"]');
+    await page.click('button[class="pf-v6-c-menu-toggle pf-m-plain"]');
 
     // Wait for the dropdown menu to appear
-    await page.waitForSelector('ul[class="pf-v5-c-menu__list"]');
+    await page.waitForSelector('ul[class="pf-v6-c-menu__list"]');
 
     // Click on the "Connection details" button within the dropdown menu
     await page.click(
-      'button[class="pf-v5-c-menu__item"] span[class="pf-v5-c-menu__item-text"]:has-text("Connection details")',
+      'button[class="pf-v6-c-menu__item"] span[class="pf-v6-c-menu__item-text"]:has-text("Connection details")',
     );
 
     // Wait for the input fields to appear
-    await page.waitForSelector('.pf-v5-c-form-control input[type="text"]');
+    await page.waitForSelector('.pf-v6-c-form-control input[type="text"]');
     expect(await page.innerText("body")).toContain(
       "Cluster connection details",
     );
@@ -34,11 +34,11 @@ test.skip("Home page", async ({ page }) => {
       "External listeners provide client access to a Kafka cluster from outside the OpenShift cluster.",
     );
     const inputValues = await page
-      .locator('.pf-v5-c-form-control input[type="text"]')
+      .locator('.pf-v6-c-form-control input[type="text"]')
       .evaluateAll((inputs) =>
         inputs.map((input) => (input as HTMLInputElement).value),
       );
-    expect(inputValues.every((value) => value.length > 1)).toBe(true); //await page.waitForSelector('span[class="pf-v5-c-form-control pf-m-readonly"] input[id="text-input-13"]');
+    expect(inputValues.every((value) => value.length > 1)).toBe(true); //await page.waitForSelector('span[class="pf-v6-c-form-control pf-m-readonly"] input[id="text-input-13"]');
   });
 
   await test.step("Data rows are present", async () => {

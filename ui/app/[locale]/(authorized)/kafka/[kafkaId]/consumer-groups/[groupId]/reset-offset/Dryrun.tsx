@@ -4,7 +4,9 @@ import {
   Alert,
   Button,
   Card,
+  CardBody,
   ClipboardCopy,
+  Content,
   DescriptionList,
   DescriptionListDescription,
   DescriptionListGroup,
@@ -26,7 +28,6 @@ import {
   Stack,
   StackItem,
 } from "@/libs/patternfly/react-core";
-import { TextContent, Text } from "@/libs/patternfly/react-core";
 import { useTranslations } from "next-intl";
 import { DownloadIcon } from "@/libs/patternfly/react-icons";
 
@@ -85,9 +86,9 @@ export function Dryrun({
       <PanelHeader>
         <Flex>
           <FlexItem>
-            <TextContent>
-              <Text>{t.rich("dry_run_result")}</Text>
-            </TextContent>
+            <Content>
+              <Content>{t.rich("dry_run_result")}</Content>
+            </Content>
           </FlexItem>
           <FlexItem>
             <Button variant="link" onClick={onClickDownload}>
@@ -99,9 +100,9 @@ export function Dryrun({
             </Button>
           </FlexItem>
         </Flex>
-        <TextContent>
-          <Text>{t.rich("consumer_name", { consumerGroupName })}</Text>
-        </TextContent>
+        <Content>
+          <Content>{t.rich("consumer_name", { consumerGroupName })}</Content>
+        </Content>
       </PanelHeader>
       <Divider />
       <PanelMain>
@@ -132,6 +133,7 @@ export function Dryrun({
                       ([topicName, offsets]) => (
                         <StackItem key={topicName}>
                           <Card component="div">
+                            <CardBody>
                             <DescriptionList id={`topic-${topicName}`}>
                               <DescriptionListGroup>
                                 <DescriptionListTerm>
@@ -182,6 +184,7 @@ export function Dryrun({
                                 </FlexItem>
                               </Flex>
                             </DescriptionList>
+                            </CardBody>
                           </Card>
                         </StackItem>
                       ),

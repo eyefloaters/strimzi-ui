@@ -121,12 +121,11 @@ export function TypeaheadSelect({
         <TextInputGroupUtilities>
           {(filterValue || value) && (
             <Button
+              icon={<TimesIcon aria-hidden />}
               variant="plain"
               onClick={onClearButtonClick}
               aria-label="Clear input value"
-            >
-              <TimesIcon aria-hidden />
-            </Button>
+            />
           )}
         </TextInputGroupUtilities>
       </TextInputGroup>

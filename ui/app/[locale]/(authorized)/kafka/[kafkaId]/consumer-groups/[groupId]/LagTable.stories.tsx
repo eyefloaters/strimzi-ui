@@ -49,7 +49,7 @@ const sampleData = [
     lag: 342,
     offset: 3068518,
     logEndOffset: 3068869,
-  }
+  },
 ];
 
 export default {
@@ -60,7 +60,6 @@ type Story = StoryObj<typeof LagTable>;
 export const Default: Story = {
   args: {
     kafkaId: "kafka1",
-    offsets: sampleData
-
-  }
+    offsets: sampleData,
+  },
 };

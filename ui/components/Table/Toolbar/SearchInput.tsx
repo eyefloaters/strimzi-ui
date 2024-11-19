@@ -7,7 +7,6 @@ import {
   ValidatedOptions,
 } from "@/libs/patternfly/react-core";
 import { ArrowRightIcon } from "@/libs/patternfly/react-icons";
-import type { KeyboardEvent } from "react";
 import { useCallback, useRef, useState } from "react";
 
 export type SearchInputProps = {
@@ -38,15 +37,6 @@ export function SearchInput({
     }
   }, [canSearch, onSearch, value]);
 
-  const onKeyPress = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key === "Enter") {
-        handleSearch();
-      }
-    },
-    [handleSearch],
-  );
-
   return (
     <InputGroup>
       <TextInput
@@ -60,7 +50,6 @@ export function SearchInput({
         }
         value={value}
         onChange={(_, value) => setValue(value)}
-        onKeyPress={onKeyPress}
         ref={inputRef}
       />
       <Button

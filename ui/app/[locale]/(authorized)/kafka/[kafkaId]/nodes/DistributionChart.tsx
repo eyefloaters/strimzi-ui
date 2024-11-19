@@ -67,7 +67,7 @@ export function DistributionChart({
   };
 
   return allCount > 0 ? (
-    <Card className={"pf-v5-u-mb-lg"}>
+    <Card className={"pf-v6-u-mb-lg"}>
       <CardHeader>
         <CardTitle>
           {t("DistributionChart.partitions_distribution_of_total")}{" "}
@@ -144,7 +144,13 @@ export function DistributionChart({
                 data={Object.keys(data).map((node) => {
                   const count = getCount(data[node]);
                   const percentage = getPercentage(count);
-                  return { name: t("DistributionChart.broker_node_count", { node, count, percentage }) };
+                  return {
+                    name: t("DistributionChart.broker_node_count", {
+                      node,
+                      count,
+                      percentage,
+                    }),
+                  };
                 })}
                 itemsPerRow={width > 600 ? 3 : 1}
               />

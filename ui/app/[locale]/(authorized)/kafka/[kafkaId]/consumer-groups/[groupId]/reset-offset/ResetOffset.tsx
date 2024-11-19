@@ -4,9 +4,6 @@ import {
   PanelHeader,
   PanelMain,
   PanelMainBody,
-  TextContent,
-  Text,
-  TextVariants,
   Radio,
   Form,
   FormGroup,
@@ -15,6 +12,7 @@ import {
   ActionGroup,
   Button,
   Alert,
+  Content,
 } from "@/libs/patternfly/react-core";
 import { useTranslations } from "next-intl";
 import {
@@ -86,12 +84,12 @@ export function ResetOffset({
   return (
     <Panel>
       <PanelHeader>
-        <TextContent>
-          <Text component={TextVariants.h1}>{t("reset_consumer_offset")}</Text>
-        </TextContent>
-        <TextContent>
-          <Text>{t.rich("consumer_name", { consumerGroupName })}</Text>
-        </TextContent>
+        <Content>
+          <Content component={"h1"}>{t("reset_consumer_offset")}</Content>
+        </Content>
+        <Content>
+          <Content>{t.rich("consumer_name", { consumerGroupName })}</Content>
+        </Content>
       </PanelHeader>
       <Divider />
       <PanelMain>

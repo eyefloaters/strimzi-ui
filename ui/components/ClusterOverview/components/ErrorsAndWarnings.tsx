@@ -29,7 +29,7 @@ export function ErrorsAndWarnings({
       isExpanded={showMessages}
       onToggle={(_, isOpen) => setShowMessages(isOpen)}
       toggleContent={
-        <Title headingLevel={"h3"} className={"pf-v5-u-font-size-sm"}>
+        <Title headingLevel={"h3"} className={"pf-v6-u-font-size-sm"}>
           {t("ClusterOverview.ErrorsAndWarnings.cluster_errors_and_warnings")}{" "}
           <Tooltip content={t("ClusterOverview.ErrorsAndWarnings.tooltip")}>
             <HelpIcon />
@@ -38,7 +38,7 @@ export function ErrorsAndWarnings({
             <Label color={"red"} isCompact={true}>
               <ExclamationCircleIcon /> {dangers}
             </Label>
-            <Label color={"gold"} isCompact={true}>
+            <Label color={"yellow"} isCompact={true}>
               <ExclamationTriangleIcon /> {warnings}
             </Label>
           </LabelGroup>

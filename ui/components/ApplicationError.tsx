@@ -9,15 +9,10 @@ import {
   EmptyStateActions,
   EmptyStateBody,
   EmptyStateFooter,
-  EmptyStateHeader,
-  EmptyStateIcon,
-  Text,
-  TextContent,
+  Content,
   Title,
 } from "@/libs/patternfly/react-core";
 import { ExclamationCircleIcon } from "@/libs/patternfly/react-icons";
-import { global_danger_color_100 } from "@/libs/patternfly/react-tokens";
-import { useTranslations } from "next-intl";
 
 export function ApplicationError({
   error,
@@ -27,24 +22,20 @@ export function ApplicationError({
   onReset: () => void;
 }) {
   return (
-    <EmptyState variant={"lg"}>
-      <EmptyStateHeader
-        titleText={"This page is temporarily unavailable"}
-        headingLevel="h1"
-        icon={
-          <EmptyStateIcon
-            icon={ExclamationCircleIcon}
-            color={global_danger_color_100.var}
-          />
-        }
-      />
+    <EmptyState
+      variant={"lg"}
+      status={"danger"}
+      titleText={"This page is temporarily unavailable"}
+      headingLevel="h1"
+      icon={ExclamationCircleIcon}
+    >
       <EmptyStateBody>
-        <TextContent>
-          <Text>
+        <Content>
+          <Content>
             Try clicking the button below, or refreshing the page. If the
             problem persists, contact your organization administrator.
-          </Text>
-        </TextContent>
+          </Content>
+        </Content>
       </EmptyStateBody>
 
       <EmptyStateFooter>
@@ -57,7 +48,7 @@ export function ApplicationError({
       <EmptyStateFooter>
         <ExpandableSection initialExpanded={false} toggleText={"Show more"}>
           {error.digest && (
-            <Title headingLevel={"h2"} className={"pf-v5-u-mb-lg"}>
+            <Title headingLevel={"h2"} className={"pf-v6-u-mb-lg"}>
               {error.digest}
             </Title>
           )}

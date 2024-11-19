@@ -1,6 +1,6 @@
-import { Text } from "@/libs/patternfly/react-core";
 import { getRequestConfig } from "next-intl/server";
 import { IntlConfig } from "use-intl";
+import { Content } from "./libs/patternfly/react-core";
 
 export const defaultTranslationValues: IntlConfig["defaultTranslationValues"] =
   {
@@ -9,7 +9,7 @@ export const defaultTranslationValues: IntlConfig["defaultTranslationValues"] =
     i: (text) => <i>{text}</i>,
     br: () => <br />,
     p: (text) => <p>{text}</p>,
-    text: (text) => <Text>{text}</Text>,
+    text: (text) => <Content>{text}</Content>,
   };
 
 export default getRequestConfig(async ({ locale }) => ({

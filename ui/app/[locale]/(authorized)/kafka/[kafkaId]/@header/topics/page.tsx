@@ -72,7 +72,7 @@ function Header({
                     <CheckCircleIcon />
                   )
                 }
-                color={"cyan"}
+                color={"teal"}
               >
                 {ok !== undefined && <Number value={ok} />}
               </Label>

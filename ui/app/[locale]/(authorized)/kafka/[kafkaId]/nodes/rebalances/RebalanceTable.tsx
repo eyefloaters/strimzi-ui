@@ -216,7 +216,7 @@ export function RebalanceTable({
             {
               title: t("refresh"),
               onClick: () => onRefresh(row),
-              isDisabled: !row.meta?.allowedActions.includes("refresh")
+              isDisabled: !row.meta?.allowedActions.includes("refresh"),
             },
             {
               title: t("stop"),
@@ -262,7 +262,7 @@ export function RebalanceTable({
                   <DescriptionListTerm>{t("brokers")}</DescriptionListTerm>
                   <DescriptionListDescription>
                     {!row.attributes.brokers ||
-                      row.attributes.brokers.length === 0
+                    row.attributes.brokers.length === 0
                       ? "N/A"
                       : row.attributes.brokers.join(",")}
                   </DescriptionListDescription>

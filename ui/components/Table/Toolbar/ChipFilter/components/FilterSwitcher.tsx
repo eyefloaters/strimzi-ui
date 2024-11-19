@@ -35,6 +35,12 @@ export function FilterSwitcher({
           isExpanded={isOpen}
           variant={"default"}
           icon={<FilterIcon />}
+          style={
+            {
+              width: "auto",
+              minWidth: "150px"
+            } as React.CSSProperties
+          }
         >
           {value}
         </MenuToggle>

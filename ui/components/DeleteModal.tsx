@@ -5,7 +5,9 @@ import {
   Form,
   FormGroup,
   Modal,
-  ModalBoxBody,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
   ModalVariant,
   TextInput,
 } from "@/libs/patternfly/react-core";
@@ -158,13 +160,27 @@ export function DeleteModalConnected({
       variant={ModalVariant.small}
       isOpen={isModalOpen}
       title={title}
-      titleIconVariant={variant === "non-destructive" ? undefined : "warning"}
-      showClose={!isDeleting}
       onClose={onCancel}
       appendTo={appendTo}
       disableFocusTrap={disableFocusTrap}
-      hasNoBodyWrapper={true}
-      actions={[
+    >
+      <ModalHeader
+        title={title}
+        titleIconVariant={variant === "non-destructive" ? undefined : "warning"}
+      />
+      {Children.toArray(children)
+        .filter((f) => f)
+        .map((c, idx) => (
+          <ModalBody key={idx}>{c}</ModalBody>
+        ))}
+      {confirmationValue && (
+        <ModalBody>
+          <DeleteModalConfirmation
+            requiredConfirmationValue={confirmationValue}
+          />
+        </ModalBody>
+      )}
+      <ModalFooter>
         <Button
           key={"confirm__button"}
           variant={
@@ -182,7 +198,7 @@ export function DeleteModalConnected({
           ouiaId={"delete"}
         >
           {t("delete")}
-        </Button>,
+        </Button>
         <Button
           key={"cancel__button"}
           variant={ButtonVariant.link}
@@ -191,21 +207,8 @@ export function DeleteModalConnected({
           ouiaId={"cancel"}
         >
           {t("cancel")}
-        </Button>,
-      ]}
-    >
-      {Children.toArray(children)
-        .filter((f) => f)
-        .map((c, idx) => (
-          <ModalBoxBody key={idx}>{c}</ModalBoxBody>
-        ))}
-      {confirmationValue && (
-        <ModalBoxBody>
-          <DeleteModalConfirmation
-            requiredConfirmationValue={confirmationValue}
-          />
-        </ModalBoxBody>
-      )}
+        </Button>
+      </ModalFooter>
     </Modal>
   );
 }

@@ -10,13 +10,11 @@ import {
   ClipboardCopy,
   Flex,
   FlexItem,
-  Text,
-  TextContent,
   Tooltip,
 } from "@/libs/patternfly/react-core";
 import { HelpIcon } from "@/libs/patternfly/react-icons";
 import { useFormatBytes } from "@/utils/useFormatBytes";
-import { Icon } from "@patternfly/react-core";
+import { Content, Icon } from "@patternfly/react-core";
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
@@ -40,7 +38,6 @@ export type Node = {
 };
 
 export function NodesTable({ nodes }: { nodes: Node[] }) {
-
   const t = useTranslations();
   const format = useFormatter();
   const formatBytes = useFormatBytes();
@@ -59,11 +56,7 @@ export function NodesTable({ nodes }: { nodes: Node[] }) {
             return (
               <Th key={key}>
                 {t("nodes.replicas")}{" "}
-                <Tooltip
-                  content={
-                    t("nodes.replicas_tooltip")
-                  }
-                >
+                <Tooltip content={t("nodes.replicas_tooltip")}>
                   <HelpIcon />
                 </Tooltip>
               </Th>
@@ -72,11 +65,7 @@ export function NodesTable({ nodes }: { nodes: Node[] }) {
             return (
               <Th key={key}>
                 {t("nodes.rack")}{" "}
-                <Tooltip
-                  content={
-                    t("nodes.rack_tooltip")
-                  }
-                >
+                <Tooltip content={t("nodes.rack_tooltip")}>
                   <HelpIcon />
                 </Tooltip>
               </Th>
@@ -133,13 +122,11 @@ export function NodesTable({ nodes }: { nodes: Node[] }) {
       isRowExpandable={() => true}
       getExpandedRow={({ row }) => {
         return (
-          <Flex gap={{ default: "gap4xl" }} className={"pf-v5-u-p-xl"}>
+          <Flex gap={{ default: "gap4xl" }} className={"pf-v6-u-p-xl"}>
             <FlexItem flex={{ default: "flex_1" }} style={{ maxWidth: "50%" }}>
-              <TextContent>
-                <Text>
-                  {t.rich("nodes.broker_host_name")}
-                </Text>
-                <Text>
+              <Content>
+                <Content>{t.rich("nodes.broker_host_name")}</Content>
+                <Content>
                   <ClipboardCopy
                     isReadOnly={true}
                     variant={"expansion"}
@@ -147,15 +134,13 @@ export function NodesTable({ nodes }: { nodes: Node[] }) {
                   >
                     {row.hostname || "n/a"}
                   </ClipboardCopy>
-                </Text>
-              </TextContent>
+                </Content>
+              </Content>
             </FlexItem>
             <FlexItem>
-              <TextContent>
-                <Text>
-                  {t.rich("nodes.broker_disk_usage")}
-                </Text>
-              </TextContent>
+              <Content>
+                <Content>{t.rich("nodes.broker_disk_usage")}</Content>
+              </Content>
               <div style={{ width: 350, height: 200 }}>
                 {row.diskUsage !== undefined &&
                   row.diskCapacity !== undefined && (
@@ -185,8 +170,8 @@ export function NodesTable({ nodes }: { nodes: Node[] }) {
                         labels={({ datum }) =>
                           datum.x
                             ? `${datum.x}: ${format.number(datum.y / 100, {
-                              style: "percent",
-                            })}`
+                                style: "percent",
+                              })}`
                             : null
                         }
                         legendData={[

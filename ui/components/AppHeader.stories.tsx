@@ -2,8 +2,8 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   Button,
-  PageNavigation,
-} from "@/libs/patternfly/react-core";
+  PageSection,
+} from "@patternfly/react-core/";
 import type { Meta, StoryObj } from "@storybook/react";
 import { AppHeader } from "./AppHeader";
 
@@ -46,7 +46,7 @@ export const WithNavigation: Story = {
   args: {
     staticRefresh: fixedDate,
     navigation: (
-      <PageNavigation>
+      <PageSection>
         <Breadcrumb>
           <BreadcrumbItem to="#">Home</BreadcrumbItem>
           <BreadcrumbItem to="#">Section</BreadcrumbItem>
@@ -54,7 +54,7 @@ export const WithNavigation: Story = {
             Page
           </BreadcrumbItem>
         </Breadcrumb>
-      </PageNavigation>
+      </PageSection>
     ),
   },
 };
@@ -67,7 +67,7 @@ export const FullFeatured: Story = {
       <Button key="action2">Action 2</Button>,
     ],
     navigation: (
-      <PageNavigation>
+      <PageSection>
         <Breadcrumb>
           <BreadcrumbItem to="#">Home</BreadcrumbItem>
           <BreadcrumbItem to="#">Section</BreadcrumbItem>
@@ -75,7 +75,7 @@ export const FullFeatured: Story = {
             Page
           </BreadcrumbItem>
         </Breadcrumb>
-      </PageNavigation>
+      </PageSection>
     ),
   },
 };

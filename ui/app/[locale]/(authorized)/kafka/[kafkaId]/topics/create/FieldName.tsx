@@ -4,8 +4,7 @@ import {
   FormSection,
   HelperText,
   HelperTextItem,
-  Text,
-  TextContent,
+  Content,
   TextInput,
   Title,
 } from "@patternfly/react-core";
@@ -30,12 +29,12 @@ export function FieldName({
   const showErrors = name !== "";
   return (
     <FormSection>
-      <TextContent>
+      <Content>
         <Title headingLevel={"h3"}>{t("CreateTopic.topic_name_field")}</Title>
-        <Text component={"small"}>
+        <Content component={"small"}>
           {t("CreateTopic.topic_name_field_description")}
-        </Text>
-      </TextContent>
+        </Content>
+      </Content>
       <FormGroup label="Topic name" isRequired fieldId="topic-name">
         <TextInput
           isRequired
@@ -47,7 +46,7 @@ export function FieldName({
           onChange={(_, value) => onChange(value)}
           validated={
             showErrors &&
-              (nameInvalid || lengthInvalid || formatInvalid || backendError)
+            (nameInvalid || lengthInvalid || formatInvalid || backendError)
               ? "error"
               : "default"
           }
@@ -55,28 +54,25 @@ export function FieldName({
         <FormHelperText>
           <HelperText component="ul" aria-live="polite" id="topic-name-helper">
             <HelperTextItem
-              isDynamic
               variant={showErrors && lengthInvalid ? "error" : "indeterminate"}
               component="li"
             >
               {t("CreateTopic.length_invalid_helper_text")}
             </HelperTextItem>
             <HelperTextItem
-              isDynamic
               variant={showErrors && nameInvalid ? "error" : "indeterminate"}
               component="li"
             >
               {t("CreateTopic.name_invalid_helper_text")}
             </HelperTextItem>
             <HelperTextItem
-              isDynamic
               variant={showErrors && formatInvalid ? "error" : "indeterminate"}
               component={"li"}
             >
               {t("CreateTopic.format_invalid_helper_text")}
             </HelperTextItem>
             {backendError && (
-              <HelperTextItem isDynamic variant={"error"} component={"li"}>
+              <HelperTextItem variant={"error"} component={"li"}>
                 {backendError}
               </HelperTextItem>
             )}
@@ -86,5 +82,3 @@ export function FieldName({
     </FormSection>
   );
 }
-
-

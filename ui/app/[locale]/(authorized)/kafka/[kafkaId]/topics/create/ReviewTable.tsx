@@ -54,9 +54,13 @@ export function ReviewTable({
               </Th>
             );
           case "new-value":
-            return <Th key={key}> {t("CreateTopic.review_table.new_value")}</Th>;
+            return (
+              <Th key={key}> {t("CreateTopic.review_table.new_value")}</Th>
+            );
           case "initial-value":
-            return <Th key={key}> {t("CreateTopic.review_table.initial_value")}</Th>;
+            return (
+              <Th key={key}> {t("CreateTopic.review_table.initial_value")}</Th>
+            );
         }
       }}
       renderCell={renderCell}

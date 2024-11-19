@@ -14,7 +14,9 @@ export async function ConnectedTopicsPartitionsCard({
 
   const totalPartitions = summary.totalPartitions;
   const totalReplicated = summary.statuses.FullyReplicated ?? 0;
-  const totalUnderReplicated = (summary.statuses.UnderReplicated ?? 0) + (summary.statuses.PartiallyOffline ?? 0);
+  const totalUnderReplicated =
+    (summary.statuses.UnderReplicated ?? 0) +
+    (summary.statuses.PartiallyOffline ?? 0);
   const totalOffline = summary.statuses.Offline ?? 0;
 
   return (

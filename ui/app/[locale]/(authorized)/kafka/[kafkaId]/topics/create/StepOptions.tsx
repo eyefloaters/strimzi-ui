@@ -2,7 +2,7 @@ import { ConfigMap, NewConfigMap, TopicMutateError } from "@/api/topics/schema";
 import { ConfigTable } from "@/app/[locale]/(authorized)/kafka/[kafkaId]/topics/create/ConfigTable";
 import { Error } from "@/app/[locale]/(authorized)/kafka/[kafkaId]/topics/create/Errors";
 import { topicMutateErrorToFieldError } from "@/app/[locale]/(authorized)/kafka/[kafkaId]/topics/create/topicMutateErrorToFieldError";
-import { Text, TextContent, Title } from "@patternfly/react-core";
+import { Content, Title } from "@patternfly/react-core";
 import { useTranslations } from "next-intl";
 
 export function StepOptions({
@@ -25,10 +25,12 @@ export function StepOptions({
   return (
     <>
       {error && !fieldError && <Error error={error} />}
-      <TextContent>
+      <Content>
         <Title headingLevel={"h2"}>{t("CreateTopic.step_option_title")}</Title>
-        <Text>{t("CreateTopic.step_option_description")}</Text>
-      </TextContent>
+        <Content component="p">
+          {t("CreateTopic.step_option_description")}
+        </Content>
+      </Content>
       <ConfigTable
         options={options}
         initialOptions={initialOptions}

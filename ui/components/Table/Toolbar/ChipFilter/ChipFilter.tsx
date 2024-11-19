@@ -60,10 +60,9 @@ export function ChipFilter({ filters, breakpoint = "md" }: ChipFilterProps) {
   return (
     <>
       <ToolbarItem
-        variant={"search-filter"}
+        variant={"label"}
         visibility={{ default: "hidden", [breakpoint]: "visible" }}
         data-testid={"large-viewport-toolbar"}
-        widths={{ default: "400px" }}
       >
         <InputGroup>
           {options.length > 1 && (
@@ -94,15 +93,15 @@ export function ChipFilter({ filters, breakpoint = "md" }: ChipFilterProps) {
           {Object.entries(filters).map(([label, f], index) => (
             <ToolbarFilter
               key={index}
-              chips={
+              labels={
                 "options" in f
                   ? f.chips.map((c) => ({ key: c, node: f.options[c] }))
                   : f.chips
               }
-              deleteChip={(_, chip) =>
+              deleteLabel={(_, chip) =>
                 f.onRemoveChip(typeof chip === "string" ? chip : chip.key)
               }
-              deleteChipGroup={f.onRemoveGroup}
+              deleteLabelGroup={f.onRemoveGroup}
               categoryName={label}
               showToolbarItem={label === selectedOption}
             >

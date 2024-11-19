@@ -500,7 +500,7 @@ const BoundActionsColumn = forwardRef<HTMLElement, ActionsColumnProps>(
           flipBehavior: ["bottom-end", "top-end"],
           appendTo: () =>
             document.getElementsByClassName(
-              "pf-v5-c-scroll-outer-wrapper",
+              "pf-v6-c-scroll-outer-wrapper",
             )[0] || document.getElementsByTagName("main")[0],
         }}
         ref={ref}

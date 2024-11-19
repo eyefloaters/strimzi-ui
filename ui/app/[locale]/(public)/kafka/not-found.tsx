@@ -8,8 +8,6 @@ import {
   EmptyStateActions,
   EmptyStateBody,
   EmptyStateFooter,
-  EmptyStateHeader,
-  EmptyStateIcon,
   PageBreadcrumb,
   PageGroup,
   PageSection,
@@ -28,16 +26,16 @@ export default function NotFound() {
           </Breadcrumb>
         </PageBreadcrumb>
       </PageGroup>
-      <PageSection variant={"light"}>
+      <PageSection variant={"default"}>
         <Title headingLevel={"h1"}>Cluster</Title>
       </PageSection>
       <PageSection padding={{ default: "noPadding" }} isFilled>
-        <EmptyState variant={"full"}>
-          <EmptyStateHeader
-            titleText={"Kafka Cluster not found"}
-            headingLevel={"h1"}
-            icon={<EmptyStateIcon icon={PathMissingIcon} />}
-          />
+        <EmptyState
+          variant={"full"}
+          titleText={"Kafka Cluster not found"}
+          headingLevel={"h1"}
+          icon={PathMissingIcon}
+        >
           <EmptyStateBody>The selected cluster is unavailable.</EmptyStateBody>
           <EmptyStateFooter>
             <EmptyStateActions>

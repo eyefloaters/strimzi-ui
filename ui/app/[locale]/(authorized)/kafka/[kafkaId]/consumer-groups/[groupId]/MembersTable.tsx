@@ -139,7 +139,7 @@ export function MembersTable({
           }));
         offsets?.sort((a, b) => a.topicName.localeCompare(b.topicName));
         return (
-          <div className={"pf-v5-u-p-lg"}>
+          <div className={"pf-v6-u-p-lg"}>
             <LagTable kafkaId={kafkaId} offsets={offsets} />
           </div>
         );

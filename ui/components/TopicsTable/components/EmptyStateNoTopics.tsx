@@ -6,8 +6,6 @@ import {
   EmptyStateActions,
   EmptyStateBody,
   EmptyStateFooter,
-  EmptyStateHeader,
-  EmptyStateIcon,
 } from "@/libs/patternfly/react-core";
 import { PlusCircleIcon } from "@/libs/patternfly/react-icons";
 import { useTranslations } from "next-intl";
@@ -24,12 +22,10 @@ export function EmptyStateNoTopics({
 }) {
   const t = useTranslations();
   return (
-    <EmptyState>
-      <EmptyStateHeader
+    <EmptyState
         titleText="No topics"
         headingLevel="h4"
-        icon={<EmptyStateIcon icon={PlusCircleIcon} />}
-      />
+        icon={PlusCircleIcon} >
       <EmptyStateBody>
         {t("EmptyStateNoTopics.to_get_started_create_your_first_topic")}{" "}
       </EmptyStateBody>

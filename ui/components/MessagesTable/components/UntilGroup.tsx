@@ -57,7 +57,7 @@ export function UntilGroup({
               isExpanded={isCategoryMenuOpen}
               data-testid={"until-group-toggle"}
               ref={toggleRef}
-              className={"pf-v5-u-w-100"}
+              className={"pf-v6-u-w-100"}
             >
               {labels[category]}
             </MenuToggle>

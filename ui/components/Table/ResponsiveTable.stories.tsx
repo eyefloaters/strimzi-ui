@@ -1,9 +1,4 @@
-import {
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  Title,
-} from "@patternfly/react-core";
+import { EmptyState, EmptyStateBody, Title } from "@patternfly/react-core";
 import { InfoIcon } from "@patternfly/react-icons";
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, fn, userEvent, within } from "@storybook/test";
@@ -123,11 +118,15 @@ export default {
         }
         tableOuiaId={args.hasCustomOuiaIds ? "table-ouia-id" : undefined}
       >
-        <EmptyState variant={"lg"}>
-          <EmptyStateIcon icon={InfoIcon} />
-          <Title headingLevel="h4" size="lg">
-            Empty state to show when the data is filtered but has no results
-          </Title>
+        <EmptyState
+          titleText={
+            <Title headingLevel="h4" size="lg">
+              Empty state to show when the data is filtered but has no results
+            </Title>
+          }
+          icon={InfoIcon}
+          variant={"lg"}
+        >
           <EmptyStateBody>
             The <code>children</code> property will be used when no data is
             available as the empty state.
@@ -257,7 +256,7 @@ export const Sortable: Story = {
   },
   play: async ({ canvasElement, args }) => {
     await expect(
-      canvasElement.querySelectorAll("[class~='pf-v5-c-table__sort']"),
+      canvasElement.querySelectorAll("[class~='pf-v6-c-table__sort']"),
     ).toHaveLength(args.columns.length);
   },
 };
@@ -269,7 +268,7 @@ export const PartiallySortable: Story = {
   },
   play: async ({ canvasElement, args }) => {
     await expect(
-      canvasElement.querySelectorAll("[class~='pf-v5-c-table__sort']"),
+      canvasElement.querySelectorAll("[class~='pf-v6-c-table__sort']"),
     ).toHaveLength(2);
   },
 };

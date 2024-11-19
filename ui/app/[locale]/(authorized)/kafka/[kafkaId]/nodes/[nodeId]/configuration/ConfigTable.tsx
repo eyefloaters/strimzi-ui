@@ -212,7 +212,7 @@ export function ConfigTable({ config }: { config: NodeConfig }) {
               <Td key={key} dataLabel={"Property"}>
                 <div>{key}</div>
                 <LabelGroup>
-                  <Label isCompact={true} color={"cyan"}>
+                  <Label isCompact={true} color="teal">
                     source={property.source}
                   </Label>
                   {property.readOnly && (

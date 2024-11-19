@@ -319,7 +319,7 @@ export function TopicsTable({
           }
           isChecked={includeHidden === false}
           onChange={(_, checked) => onInternalTopicsChange(!checked)}
-          className={"pf-v5-u-py-xs"}
+          className={"pf-v6-u-py-xs"}
         />,
       ]}
       variant={TableVariant.compact}

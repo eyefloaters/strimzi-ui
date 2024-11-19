@@ -3,13 +3,11 @@ import { ExpandableCard } from "@/components/ExpandableCard";
 import { ExternalLink } from "@/components/Navigation/ExternalLink";
 import {
   CardBody,
+  Content,
   EmptyState,
   EmptyStateActions,
   EmptyStateBody,
   EmptyStateFooter,
-  EmptyStateHeader,
-  Text,
-  TextContent,
   Tooltip,
 } from "@/libs/patternfly/react-core";
 import { HelpIcon } from "@/libs/patternfly/react-icons";
@@ -29,7 +27,7 @@ export function RecentTopicsCard({
   return (
     <ExpandableCard
       title={
-        <TextContent>
+        <Content>
           <b>
             {t("homepage.recently_viewed_topics_header")}{" "}
             <Tooltip
@@ -40,12 +38,12 @@ export function RecentTopicsCard({
               <HelpIcon />
             </Tooltip>
           </b>
-          <Text component={"small"}>
+          <Content component={"small"}>
             {t("homepage.last_accessed_topics", {
               product: productName,
             })}
-          </Text>
-        </TextContent>
+          </Content>
+        </Content>
       }
       isCompact={true}
     >
@@ -55,14 +53,16 @@ export function RecentTopicsCard({
         ) : viewedTopics.length > 0 ? (
           <TopicsTable topics={viewedTopics} />
         ) : (
-          <EmptyState variant={"xs"}>
-            <EmptyStateHeader title={t("homepage.topics_empty_state_header")} />
+          <EmptyState
+            variant={"xs"}
+            title={t("homepage.topics_empty_state_header")}
+          >
             <EmptyStateBody>
               {t("homepage.empty_topics_description", { product: productName })}
             </EmptyStateBody>
             {isProductizedBuild && (
               <EmptyStateFooter>
-                <EmptyStateActions className={"pf-v5-u-font-size-sm"}>
+                <EmptyStateActions className={"pf-v6-u-font-size-sm"}>
                   <ExternalLink
                     testId={"recent-topics-empty-state-link"}
                     href={t("learning.links.topicOperatorUse")}

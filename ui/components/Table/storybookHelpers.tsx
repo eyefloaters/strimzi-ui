@@ -1,4 +1,4 @@
-import { EmptyState, EmptyStateIcon, Title } from "@patternfly/react-core";
+import { EmptyState, Title } from "@patternfly/react-core";
 import { InfoIcon } from "@patternfly/react-icons";
 import type { IAction } from "@patternfly/react-table";
 import type { ChipFilterProps } from "./Toolbar";
@@ -89,19 +89,15 @@ export const sampleToolbarFilters: ChipFilterProps["filters"] = {
 };
 
 export const SampleEmptyStateNoData = (
-  <EmptyState variant={"lg"}>
-    <EmptyStateIcon icon={InfoIcon} />
-    <Title headingLevel="h4" size="lg">
+  <EmptyState titleText={<Title headingLevel="h4" size="lg">
       Empty state to show when the initial loading returns no data
-    </Title>
-  </EmptyState>
+    </Title>} icon={InfoIcon} variant={"lg"}>
+    </EmptyState>
 );
 
 export const SampleEmptyStateNoResults = (
-  <EmptyState variant={"lg"}>
-    <EmptyStateIcon icon={InfoIcon} />
-    <Title headingLevel="h4" size="lg">
+  <EmptyState titleText={<Title headingLevel="h4" size="lg">
       Empty state to show when the data is filtered but has no results
-    </Title>
-  </EmptyState>
+    </Title>} icon={InfoIcon} variant={"lg"}>
+    </EmptyState>
 );

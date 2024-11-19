@@ -248,7 +248,7 @@ export const TableView = <TRow, TCol>({
           {tools && (
             <>
               {actions && <ToolbarItem variant="separator"></ToolbarItem>}
-              <ToolbarGroup variant="icon-button-group">
+              <ToolbarGroup variant="action-group">
                 {tools.map((t, idx) => (
                   <ToolbarItem key={idx}>{t}</ToolbarItem>
                 ))}
@@ -258,7 +258,7 @@ export const TableView = <TRow, TCol>({
 
           {/* pagination controls */}
           {showPagination ? (
-            <ToolbarGroup align={{ default: "alignRight" }}>
+            <ToolbarGroup align={{ default: "alignStart" }}>
               <Pagination
                 itemCount={itemCount}
                 page={page}

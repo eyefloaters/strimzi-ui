@@ -9,8 +9,7 @@ import {
   FlexItem,
   Icon,
   Skeleton,
-  Text,
-  TextContent,
+  Content,
   Tooltip,
 } from "@/libs/patternfly/react-core";
 import {
@@ -67,23 +66,29 @@ export function TopicsPartitionsCard({
               ) : (
                 <Flex gap={{ default: "gapMd" }}>
                   <FlexItem>
-                    <TextContent>
-                      <Text component={"small"}>
+                    <Content>
+                      <Content component={"small"}>
                         <Link href={"./topics"}>
-                          <Number value={topicsReplicated + topicsUnderReplicated + topicsOffline} />{" "}
+                          <Number
+                            value={
+                              topicsReplicated +
+                              topicsUnderReplicated +
+                              topicsOffline
+                            }
+                          />{" "}
                           {t("ClusterOverview.total_topics")}
                         </Link>
-                      </Text>
-                    </TextContent>
+                      </Content>
+                    </Content>
                   </FlexItem>
                   <Divider orientation={{ default: "vertical" }} />
                   <FlexItem>
-                    <TextContent>
-                      <Text component={"small"}>
+                    <Content>
+                      <Content component={"small"}>
                         <Number value={partitions} />
                         &nbsp; {t("ClusterOverview.total_partitions")}
-                      </Text>
-                    </TextContent>
+                      </Content>
+                    </Content>
                   </FlexItem>
                 </Flex>
               )}
@@ -109,8 +114,8 @@ export function TopicsPartitionsCard({
                   <Number value={topicsReplicated} />
                 )}
               </Link>
-              <TextContent className={"pf-v5-u-text-nowrap"}>
-                <Text component={"small"}>
+              <Content className={"pf-v6-u-text-nowrap"}>
+                <Content component={"small"}>
                   <Icon status={"success"}>
                     <CheckCircleIcon />
                   </Icon>
@@ -122,8 +127,8 @@ export function TopicsPartitionsCard({
                   >
                     <HelpIcon />
                   </Tooltip>
-                </Text>
-              </TextContent>
+                </Content>
+              </Content>
             </FlexItem>
             <FlexItem>
               <Link href={"./topics?status=UnderReplicated"}>
@@ -137,8 +142,8 @@ export function TopicsPartitionsCard({
                   <Number value={topicsUnderReplicated} />
                 )}
               </Link>
-              <TextContent className={"pf-v5-u-text-nowrap"}>
-                <Text component={"small"}>
+              <Content className={"pf-v6-u-text-nowrap"}>
+                <Content component={"small"}>
                   <Icon status={"warning"}>
                     <ExclamationTriangleIcon />
                   </Icon>
@@ -150,8 +155,8 @@ export function TopicsPartitionsCard({
                   >
                     <HelpIcon />
                   </Tooltip>
-                </Text>
-              </TextContent>
+                </Content>
+              </Content>
             </FlexItem>
             <FlexItem>
               <Link href={"./topics?status=Offline"}>
@@ -162,13 +167,11 @@ export function TopicsPartitionsCard({
                     style={{ display: "inline-block" }}
                   />
                 ) : (
-                  <Number
-                    value={topicsOffline}
-                  />
+                  <Number value={topicsOffline} />
                 )}
               </Link>
-              <TextContent className={"pf-v5-u-text-nowrap"}>
-                <Text component={"small"}>
+              <Content className={"pf-v6-u-text-nowrap"}>
+                <Content component={"small"}>
                   <Icon status={"danger"}>
                     <ExclamationCircleIcon />
                   </Icon>
@@ -178,8 +181,8 @@ export function TopicsPartitionsCard({
                   >
                     <HelpIcon />
                   </Tooltip>
-                </Text>
-              </TextContent>
+                </Content>
+              </Content>
             </FlexItem>
           </Flex>
         </Flex>

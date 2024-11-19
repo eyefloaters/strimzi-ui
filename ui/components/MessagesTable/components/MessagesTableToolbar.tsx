@@ -92,9 +92,9 @@ export function MessagesTableToolbar({
     >
       <ToolbarContent>
         <ToolbarItem
-          variant={"search-filter"}
-          widths={{ default: "calc(100% - 52px * 2)" }}
+          variant={"label"}
           style={{
+            width:"calc(100% - 52px * 2)",
             maxWidth: 700,
           }}
         >
@@ -111,16 +111,15 @@ export function MessagesTableToolbar({
           />
         </ToolbarItem>
 
-        <ToolbarGroup variant={"icon-button-group"}>
+        <ToolbarGroup variant="action-group-plain">
           <ToolbarItem>
             <Tooltip content={"Manage columns"}>
               <Button
+                icon={<ColumnsIcon />}
                 onClick={onColumnManagement}
                 variant={"plain"}
                 aria-label={"Columns management"}
-              >
-                <ColumnsIcon />
-              </Button>
+              />
             </Tooltip>
           </ToolbarItem>
           <ToolbarItem>
@@ -132,12 +131,11 @@ export function MessagesTableToolbar({
                 separator={";"}
               >
                 <Button
+                  icon={<FileCsvIcon />}
                   variant={"plain"}
                   aria-label={"Download as CSV"}
                   isDisabled={messages.length === 0}
-                >
-                  <FileCsvIcon />
-                </Button>
+                />
               </CsvDownloader>
             </Tooltip>
           </ToolbarItem>

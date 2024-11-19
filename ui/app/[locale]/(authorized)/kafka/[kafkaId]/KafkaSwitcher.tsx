@@ -64,12 +64,12 @@ export function KafkaSwitcher<T extends string>({
           onClick={onToggleClick}
           isExpanded={isOpen}
           variant={"plainText"}
-          className={"pf-v5-u-p-0"}
+          className={"pf-v6-u-p-0"}
           style={
             {
-              "--pf-v5-c-menu-toggle__toggle-icon--MarginRight": 0,
-              "--pf-v5-c-menu-toggle__controls--PaddingLeft":
-                "var(--pf-v5-global--spacer--sm)",
+              "--pf-v6-c-menu-toggle__toggle-icon--MarginRight": 0,
+              "--pf-v6-c-menu-toggle__controls--PaddingLeft":
+                "var(--pf-v6--global--spacer--sm)",
             } as CSSProperties
           }
         >

@@ -10,6 +10,7 @@ export default async function SignIn({
   params: { kafkaId?: string };
 }) {
   const clusters = await getKafkaClusters();
+
   const cluster = clusters.find((c) => c.id === params.kafkaId);
   if (cluster) {
     const authMethod = cluster.meta.authentication;
@@ -18,6 +19,7 @@ export default async function SignIn({
       oauth: "oauth-token" as const,
       anonymous: "anonymous" as const,
     }[authMethod?.method ?? "anonymous"];
+
     return (
       <SignInPage
         provider={provider}

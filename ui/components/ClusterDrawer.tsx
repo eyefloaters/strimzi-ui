@@ -35,16 +35,16 @@ export function ClusterDrawer({ children }: PropsWithChildren) {
             <Divider />
             <Suspense
               fallback={
-                <div className={"pf-v5-u-p-lg"}>
-                  <Skeleton width={"80%"} className="pf-v5-u-my-md" />
-                  <Skeleton width={"50%"} className="pf-v5-u-my-md" />
-                  <Skeleton width={"60%"} className="pf-v5-u-my-md" />
-                  <Skeleton width={"30%"} className="pf-v5-u-my-md" />
-                  <Skeleton width={"80%"} className="pf-v5-u-my-md" />
-                  <Skeleton width={"50%"} className="pf-v5-u-my-md" />
-                  <Skeleton width={"60%"} className="pf-v5-u-my-md" />
-                  <Skeleton width={"30%"} className="pf-v5-u-my-md" />
-                  <Skeleton width={"80%"} className="pf-v5-u-my-md" />
+                <div className={"pf-v6-u-p-lg"}>
+                  <Skeleton width={"80%"} className="pf-v6-u-my-md" />
+                  <Skeleton width={"50%"} className="pf-v6-u-my-md" />
+                  <Skeleton width={"60%"} className="pf-v6-u-my-md" />
+                  <Skeleton width={"30%"} className="pf-v6-u-my-md" />
+                  <Skeleton width={"80%"} className="pf-v6-u-my-md" />
+                  <Skeleton width={"50%"} className="pf-v6-u-my-md" />
+                  <Skeleton width={"60%"} className="pf-v6-u-my-md" />
+                  <Skeleton width={"30%"} className="pf-v6-u-my-md" />
+                  <Skeleton width={"80%"} className="pf-v6-u-my-md" />
                 </div>
               }
             >
@@ -54,7 +54,7 @@ export function ClusterDrawer({ children }: PropsWithChildren) {
         }
       >
         <DrawerContentBody
-          className={"pf-v5-u-display-flex pf-v5-u-flex-direction-column"}
+          className={"pf-v6-u-display-flex pf-v6-u-flex-direction-column"}
           // style={{
           //   height: "100%",
           //   width: "100%",

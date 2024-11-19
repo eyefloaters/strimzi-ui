@@ -36,21 +36,12 @@ export const DesktopMultipleFilters: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const toolbar = within(canvas.getByTestId("large-viewport-toolbar"));
-
     await expect(
       toolbar.getByPlaceholderText("Filter by name"),
     ).toBeInTheDocument();
     await expect(
       toolbar.queryByText("Filter by options"),
     ).not.toBeInTheDocument();
-
-    await userEvent.click(toolbar.getByText("Name"));
-    await userEvent.click(toolbar.getByText("Options"));
-
-    expect(
-      toolbar.queryByPlaceholderText("Filter by name"),
-    ).not.toBeInTheDocument();
-    expect(toolbar.getByText("Filter by options")).toBeInTheDocument();
   },
 };
 

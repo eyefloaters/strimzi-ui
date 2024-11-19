@@ -16,7 +16,7 @@ export function AlertContinuousMode({
       title={t("AlertContinuousMode.title")}
       variant={"info"}
       isInline={true}
-      className={"pf-v5-u-mx-md"}
+      className={"pf-v6-u-mx-md"}
       actionLinks={
         <AlertActionLink onClick={() => onToggle(!isPaused)}>
           {isPaused ? (

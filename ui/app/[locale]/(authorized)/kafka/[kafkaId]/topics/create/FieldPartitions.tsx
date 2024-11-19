@@ -5,8 +5,7 @@ import {
   HelperText,
   HelperTextItem,
   NumberInput,
-  Text,
-  TextContent,
+  Content,
   Title,
 } from "@patternfly/react-core";
 import { useTranslations } from "next-intl";
@@ -25,12 +24,14 @@ export function FieldPartitions({
   const t = useTranslations();
   return (
     <FormSection>
-      <TextContent>
-        <Title headingLevel={"h3"}>{t("CreateTopic.topic_partition_field")}</Title>
-        <Text component={"small"}>
+      <Content>
+        <Title headingLevel={"h3"}>
+          {t("CreateTopic.topic_partition_field")}
+        </Title>
+        <Content component={"small"}>
           {t("CreateTopic.topic_partition_field_description")}
-        </Text>
-      </TextContent>
+        </Content>
+      </Content>
       <FormGroup label="Partitions" isRequired fieldId="topic-partitions">
         <NumberInput
           required
@@ -52,7 +53,7 @@ export function FieldPartitions({
               {t("CreateTopic.topic_partition_helper_text")}
             </HelperTextItem>
             {backendError && (
-              <HelperTextItem isDynamic variant={"error"} component={"li"}>
+              <HelperTextItem variant={"error"} component={"li"}>
                 {backendError}
               </HelperTextItem>
             )}
