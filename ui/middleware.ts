@@ -6,7 +6,7 @@ import { logger } from "@/utils/logger";
 
 const log = logger.child({ module: "middleware" });
 
-const publicPages = ["/kafka/[^/]+/login", "/cluster", "/"];
+const publicPages = ["/kafka/[^/]+/login", "/cluster", "/", "/schema"];
 const protectedPages = ["/kafka/[^/]+/.*"];
 
 const intlMiddleware = createIntlMiddleware(routing);
@@ -43,22 +43,33 @@ const protectedPathnameRegex = RegExp(
 );
 
 export default async function middleware(req: NextRequest) {
-    /*
-     * Next.js middleware doesn't support reading files, so here we make a (cached)
-     * call to the /config endpoint within the same application :(
-     */
-  let oidcEnabled = await fetch(`http://127.0.0.1:${process.env.PORT}/config`, { cache: "force-cache" })
-    .then(cfg => cfg.json())
-    .then(cfg => cfg["oidc"]);
+  /*
+   * Next.js middleware doesn't support reading files, so here we make a (cached)
+   * call to the /config endpoint within the same application :(
+   */
+  let oidcEnabled = await fetch(`http://127.0.0.1:${process.env.PORT}/config`, {
+    cache: "force-cache",
+  })
+    .then((cfg) => cfg.json())
+    .then((cfg) => cfg["oidc"]);
+
+  const searchParams = req.nextUrl.searchParams;
 
   const requestPath = req.nextUrl.pathname;
-  const isPublicPage = !oidcEnabled && publicPathnameRegex.test(requestPath);
-  const isProtectedPage = oidcEnabled || protectedPathnameRegex.test(requestPath);
+  const isSchemaPublic =
+    requestPath === "/schema" &&
+    searchParams.has("content") &&
+    searchParams.has("schemaname");
+
+  const isPublicPage =
+    (!oidcEnabled && publicPathnameRegex.test(requestPath)) || isSchemaPublic;
+  const isProtectedPage =
+    oidcEnabled || protectedPathnameRegex.test(requestPath);
 
   if (isPublicPage) {
     return intlMiddleware(req);
   } else if (isProtectedPage) {
-    return (authMiddleware)(req);
+    return authMiddleware(req);
   } else {
     log.debug(
       {

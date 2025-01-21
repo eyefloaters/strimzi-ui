@@ -37,17 +37,20 @@ import { NoData } from "./NoData";
 import { maybeJson } from "./utils";
 import { getSchema } from "@/api/schema/action";
 import { SchemaValue } from "./SchemaValue";
+import { ExternalLink } from "@/components/Navigation/ExternalLink";
 
 export type MessageDetailsProps = {
   onClose: () => void;
   defaultTab: MessageDetailsBodyProps["defaultTab"];
   message: Message | undefined;
+  baseurl: string;
 };
 
 export function MessageDetails({
   onClose,
   defaultTab,
   message,
+  baseurl,
 }: MessageDetailsProps) {
   const t = useTranslations("message-browser");
   const body = useMemo(() => {
@@ -56,6 +59,7 @@ export function MessageDetails({
         <MessageDetailsBody
           defaultTab={defaultTab}
           messageKey={message.attributes.key}
+          baseurl={baseurl}
           {...message}
         />
       )
@@ -80,10 +84,12 @@ export function MessageDetails({
 export type MessageDetailsBodyProps = {
   defaultTab: "value" | "key" | "headers";
   messageKey: string | null;
+  baseurl: string;
 } & Omit<Message, "key">;
 
 export function MessageDetailsBody({
   defaultTab,
+  baseurl,
   ...message
 }: MessageDetailsBodyProps) {
   const t = useTranslations("message-browser");
@@ -225,7 +231,17 @@ export function MessageDetailsBody({
               {valueSchemaContent && (
                 <StackItem>
                   <Title headingLevel={"h4"}>
-                    {message.relationships.valueSchema?.meta?.name}
+                    {message.relationships.valueSchema?.meta?.name &&
+                    message.relationships.valueSchema?.links?.content ? (
+                      <ExternalLink
+                        testId="schema-value"
+                        href={`/schema?content=${encodeURIComponent(message.relationships.valueSchema.links.content)}&schemaname=${encodeURIComponent(message.relationships.valueSchema.meta.name)}`}
+                      >
+                        {message.relationships.valueSchema.meta.name}
+                      </ExternalLink>
+                    ) : (
+                      message.relationships.valueSchema?.meta?.name
+                    )}
                   </Title>
                   <SchemaValue
                     schema={valueSchemaContent}
@@ -262,7 +278,19 @@ export function MessageDetailsBody({
               {keySchemaContent && (
                 <StackItem>
                   <Title headingLevel={"h4"}>
-                    {message.relationships.keySchema?.meta?.name}
+                    {message.relationships.keySchema?.meta?.name &&
+                    message.relationships.keySchema?.links?.content ? (
+                      <ExternalLink
+                        testId={"key-schema"}
+                        href={`/schema?content=${encodeURIComponent(message.relationships.keySchema?.links?.content)}&schemaname=${encodeURIComponent(
+                          message.relationships.keySchema?.meta?.name,
+                        )}`}
+                      >
+                        {message.relationships.keySchema?.meta?.name}
+                      </ExternalLink>
+                    ) : (
+                      message.relationships.keySchema?.meta?.name
+                    )}
                   </Title>
                   <SchemaValue
                     schema={keySchemaContent}

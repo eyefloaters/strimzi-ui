@@ -158,6 +158,7 @@ export function MessagesTable({
               message={selectedMessage}
               defaultTab={defaultTab}
               onClose={onDeselectMessage}
+              baseurl={baseurl}
             />
           }
         >
@@ -283,25 +284,7 @@ export function MessagesTable({
                                 {row.relationships.keySchema && (
                                   <TextContent>
                                     <Text component={"small"}>
-                                      {row.relationships.keySchema?.meta
-                                        ?.name &&
-                                      row.relationships.keySchema?.links
-                                        ?.content ? (
-                                        <ExternalLink
-                                          testId={"key-schema"}
-                                          href={`${baseurl}/schema?content=${encodeURIComponent(row.relationships.keySchema?.links?.content)}&schemaname=${encodeURIComponent(
-                                            row.relationships.keySchema?.meta
-                                              ?.name,
-                                          )}`}
-                                        >
-                                          {
-                                            row.relationships.keySchema?.meta
-                                              ?.name
-                                          }
-                                        </ExternalLink>
-                                      ) : (
-                                        row.relationships.keySchema?.meta?.name
-                                      )}
+                                      {row.relationships.keySchema?.meta?.name}
                                       {row.relationships.keySchema?.meta
                                         ?.errors && (
                                         <>
@@ -356,23 +339,10 @@ export function MessagesTable({
                                 {row.relationships.valueSchema && (
                                   <TextContent>
                                     <Text component={"small"}>
-                                      {row.relationships.valueSchema?.meta
-                                        ?.name &&
-                                      row.relationships.valueSchema?.links
-                                        ?.content ? (
-                                        <ExternalLink
-                                          testId="schema-value"
-                                          href={`${baseurl}/schema?content=${encodeURIComponent(row.relationships.valueSchema.links.content)}&schemaname=${encodeURIComponent(row.relationships.valueSchema.meta.name)}`}
-                                        >
-                                          {
-                                            row.relationships.valueSchema.meta
-                                              .name
-                                          }
-                                        </ExternalLink>
-                                      ) : (
+                                      {
                                         row.relationships.valueSchema?.meta
                                           ?.name
-                                      )}
+                                      }
                                       {row.relationships.valueSchema?.meta
                                         ?.errors && (
                                         <>
