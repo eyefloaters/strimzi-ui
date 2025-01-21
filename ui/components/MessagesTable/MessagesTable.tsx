@@ -39,7 +39,6 @@ import { NoData } from "./components/NoData";
 import { NoResultsEmptyState } from "./components/NoResultsEmptyState";
 import { UnknownValuePreview } from "./components/UnknownValuePreview";
 import { beautifyUnknownValue, isSameMessage } from "./components/utils";
-import { ExternalLink } from "../Navigation/ExternalLink";
 
 const columnWidths: Record<Column, BaseCellProps["width"]> = {
   "offset-partition": 10,
@@ -77,7 +76,6 @@ export type MessagesTableProps = {
   onSelectMessage: (message: Message) => void;
   onDeselectMessage: () => void;
   onReset: () => void;
-  baseurl: string;
 };
 
 export function MessagesTable({
@@ -98,7 +96,6 @@ export function MessagesTable({
   onDeselectMessage,
   onReset,
   children,
-  baseurl,
 }: PropsWithChildren<MessagesTableProps>) {
   const t = useTranslations("message-browser");
   const columnLabels = useColumnLabels();
@@ -158,7 +155,6 @@ export function MessagesTable({
               message={selectedMessage}
               defaultTab={defaultTab}
               onClose={onDeselectMessage}
-              baseurl={baseurl}
             />
           }
         >

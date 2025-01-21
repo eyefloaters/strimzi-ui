@@ -38,7 +38,7 @@ export default async function ConnectedMessagesPage({
       ? await getTopicMessage(kafkaId, topicId, {
           offset: selectedOffset,
           partition: selectedPartition,
-        }).then(resp => resp.payload ?? undefined)
+        }).then((resp) => resp.payload ?? undefined)
       : undefined;
 
   return (
@@ -48,7 +48,6 @@ export default async function ConnectedMessagesPage({
       topicName={topic.attributes.name!}
       selectedMessage={selectedMessage}
       partitions={topic.attributes.numPartitions ?? 0}
-      baseurl={`/kafka/${kafkaId}/topics/${topicId}/messages`}
     />
   );
 }

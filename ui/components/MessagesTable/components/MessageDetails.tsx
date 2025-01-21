@@ -43,14 +43,12 @@ export type MessageDetailsProps = {
   onClose: () => void;
   defaultTab: MessageDetailsBodyProps["defaultTab"];
   message: Message | undefined;
-  baseurl: string;
 };
 
 export function MessageDetails({
   onClose,
   defaultTab,
   message,
-  baseurl,
 }: MessageDetailsProps) {
   const t = useTranslations("message-browser");
   const body = useMemo(() => {
@@ -59,7 +57,6 @@ export function MessageDetails({
         <MessageDetailsBody
           defaultTab={defaultTab}
           messageKey={message.attributes.key}
-          baseurl={baseurl}
           {...message}
         />
       )
@@ -84,12 +81,10 @@ export function MessageDetails({
 export type MessageDetailsBodyProps = {
   defaultTab: "value" | "key" | "headers";
   messageKey: string | null;
-  baseurl: string;
 } & Omit<Message, "key">;
 
 export function MessageDetailsBody({
   defaultTab,
-  baseurl,
   ...message
 }: MessageDetailsBodyProps) {
   const t = useTranslations("message-browser");
