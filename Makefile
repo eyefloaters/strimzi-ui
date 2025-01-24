@@ -17,7 +17,7 @@ CONSOLE_OPERATOR_CATALOG_IMAGE ?= $(IMAGE_REGISTRY)/$(IMAGE_GROUP)/console-opera
 
 CONTAINER_RUNTIME ?= $(shell which podman || which docker)
 SKOPEO_TRANSPORT ?= $(shell which podman >/dev/null && echo "containers-storage:" || echo "docker-daemon:")
-PLATFORMS ?= linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
+PLATFORMS ?= $(shell docker system info --format '{{.OSType}}/{{.Architecture}}' 2>/dev/null || podman info --format={{".Version.OsArch"}})
 SKIP_RANGE ?= ""
 
 CONSOLE_UI_NEXTAUTH_SECRET ?= $(shell openssl rand -base64 32)
@@ -26,7 +26,7 @@ CONSOLE_UI_NEXTAUTH_SECRET ?= $(shell openssl rand -base64 32)
 # Without this export, UI and API images could not be pulled from registry during the deployment of Console instance
 export QUARKUS_CONTAINER_IMAGE_TAG=${VERSION}
 export QUARKUS_KUBERNETES_VERSION=${VERSION}
-export QUARKUS_DOCKER_BUILDX_PLATFORM=${PLATFORMS}
+export QUARKUS_DOCKER_ADDITIONAL_ARGS ?= --platform=${PLATFORMS}
 
 container-image-api:
 	mvn package -am -pl api -Pcontainer-image -DskipTests -Dquarkus.container-image.image=$(CONSOLE_API_IMAGE)
