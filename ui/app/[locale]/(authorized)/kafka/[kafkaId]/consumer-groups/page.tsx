@@ -65,7 +65,6 @@ export default function ConsumerGroupsPage({
             nextPageCursor={undefined}
             prevPageCursor={undefined}
             consumerGroupCount={0}
-            refresh={undefined}
           />
         }
       >
@@ -99,20 +98,6 @@ async function AsyncConsumerGroupTable({
   pageCursor: string | undefined;
   state: ConsumerGroupState[] | undefined;
 } & KafkaParams) {
-  async function refresh() {
-    "use server";
-    const consumerGroup = (await getConsumerGroups(kafkaId, {
-      id,
-      sort: sortMap[sort],
-      sortDir,
-      pageSize,
-      pageCursor,
-      state,
-    }))?.payload;
-
-    return consumerGroup?.data ?? [];
-  }
-
   const response = await getConsumerGroups(kafkaId, {
     id,
     sort: sortMap[sort],
@@ -128,14 +113,13 @@ async function AsyncConsumerGroupTable({
 
   const consumerGroups = response.payload!;
 
-  const nextPageQuery = consumerGroups.links.next
-    ? new URLSearchParams(consumerGroups.links.next)
+  const nextPageCursor = consumerGroups.links.next
+    ? `after:${new URLSearchParams(consumerGroups.links.next).get("page[after]")}`
     : undefined;
-  const nextPageCursor = nextPageQuery?.get("page[after]");
-  const prevPageQuery = consumerGroups.links.prev
-    ? new URLSearchParams(consumerGroups.links.prev)
+
+  const prevPageCursor = consumerGroups.links.prev
+    ? `before:${new URLSearchParams(consumerGroups.links.prev).get("page[before]")}`
     : undefined;
-  const prevPageCursor = prevPageQuery?.get("page[after]");
 
   return (
     <ConnectedConsumerGroupTable
@@ -151,7 +135,6 @@ async function AsyncConsumerGroupTable({
       baseurl={`/kafka/${kafkaId}/consumer-groups`}
       nextPageCursor={nextPageCursor}
       prevPageCursor={prevPageCursor}
-      refresh={refresh}
     />
   );
 }

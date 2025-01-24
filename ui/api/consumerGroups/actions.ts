@@ -1,5 +1,12 @@
 "use server";
-import { fetchData, patchData, sortParam, ApiResponse } from "@/api/api";
+import {
+  fetchData,
+  patchData,
+  sortParam,
+  ApiResponse,
+  filterEq,
+  filterIn,
+} from "@/api/api";
 import {
   ConsumerGroup,
   ConsumerGroupResponseSchema,
@@ -16,7 +23,7 @@ export async function getConsumerGroup(
   return fetchData(
     `/api/kafkas/${kafkaId}/consumerGroups/${groupId}`,
     "",
-    (rawData) => ConsumerGroupResponseSchema.parse(rawData).data
+    (rawData) => ConsumerGroupResponseSchema.parse(rawData).data,
   );
 }
 
@@ -36,22 +43,21 @@ export async function getConsumerGroups(
     filterUndefinedFromObj({
       "fields[consumerGroups]":
         params.fields ?? "state,simpleConsumerGroup,members,offsets",
-      "filter[id]": params.id ? `eq,${params.id}` : undefined,
-      // TODO: pass filter from UI
-      "filter[state]":
-        params.state && params.state.length > 0
-          ? `in,${params.state.join(",")}`
-          : undefined,
+      "filter[id]": filterEq(params.id),
+      "filter[state]": filterIn(params.state),
       "page[size]": params.pageSize,
-      "page[after]": params.pageCursor,
+      "page[after]": params.pageCursor?.startsWith("after:")
+        ? params.pageCursor.slice(6)
+        : undefined,
+      "page[before]": params.pageCursor?.startsWith("before:")
+        ? params.pageCursor.slice(7)
+        : undefined,
       sort: sortParam(params.sort, params.sortDir),
     }),
   );
 
-  return fetchData(
-    `/api/kafkas/${kafkaId}/consumerGroups`,
-    sp,
-    (rawData) => ConsumerGroupsResponseSchema.parse(rawData),
+  return fetchData(`/api/kafkas/${kafkaId}/consumerGroups`, sp, (rawData) =>
+    ConsumerGroupsResponseSchema.parse(rawData),
   );
 }
 
@@ -67,7 +73,8 @@ export async function getTopicConsumerGroups(
 ): Promise<ApiResponse<ConsumerGroupsResponse>> {
   const sp = new URLSearchParams(
     filterUndefinedFromObj({
-      "fields[consumerGroups]": "state,simpleConsumerGroup,members,offsets,coordinator,partitionAssignor",
+      "fields[consumerGroups]":
+        "state,simpleConsumerGroup,members,offsets,coordinator,partitionAssignor",
       "page[size]": params.pageSize,
       "page[after]": params.pageCursor,
       sort: sortParam(params.sort, params.sortDir),
@@ -76,7 +83,7 @@ export async function getTopicConsumerGroups(
   return fetchData(
     `/api/kafkas/${kafkaId}/topics/${topicId}/consumerGroups`,
     sp,
-    (rawData) => ConsumerGroupsResponseSchema.parse(rawData)
+    (rawData) => ConsumerGroupsResponseSchema.parse(rawData),
   );
 }
 
@@ -105,6 +112,7 @@ export async function updateConsumerGroup(
         },
       },
     },
-    (rawData) => dryRun ? ConsumerGroupResponseSchema.parse(rawData).data : undefined,
+    (rawData) =>
+      dryRun ? ConsumerGroupResponseSchema.parse(rawData).data : undefined,
   );
 }
