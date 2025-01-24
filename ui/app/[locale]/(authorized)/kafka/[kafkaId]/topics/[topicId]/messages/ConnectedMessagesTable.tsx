@@ -21,9 +21,9 @@ import {
 } from "react";
 
 const EMPTY_MESSAGES: ApiResponse<Message[]> = {
-    payload: undefined,
-    errors: undefined,
-    timestamp: new Date(0),
+  payload: undefined,
+  errors: undefined,
+  timestamp: new Date(0),
 };
 
 export function ConnectedMessagesTable({
@@ -32,14 +32,12 @@ export function ConnectedMessagesTable({
   topicName,
   selectedMessage: serverSelectedMessage,
   partitions,
-  baseurl
 }: {
   kafkaId: string;
   topicId: string;
   topicName: string;
   selectedMessage: Message | undefined;
   partitions: number;
-  baseurl: string;
 }) {
   const [params, sp] = useParseSearchParams();
   const updateUrl = useFilterParams(sp);
@@ -146,19 +144,19 @@ export function ConnectedMessagesTable({
   const onUpdates = useCallback((newMessages: ApiResponse<Message[]>) => {
     startTransition(() =>
       setMessages((prevMessages) => {
-        const messagesToAdd = newMessages.payload?.filter(
-          (m) =>
-            !prevMessages.payload?.find(
-              (m2) =>
-                m2.attributes.offset === m.attributes.offset &&
-                m2.attributes.partition === m.attributes.partition,
-            ),
-        ) ?? [];
+        const messagesToAdd =
+          newMessages.payload?.filter(
+            (m) =>
+              !prevMessages.payload?.find(
+                (m2) =>
+                  m2.attributes.offset === m.attributes.offset &&
+                  m2.attributes.partition === m.attributes.partition,
+              ),
+          ) ?? [];
         return {
-          payload: Array.from(new Set([...messagesToAdd, ...prevMessages.payload ?? []])).slice(
-            0,
-            100,
-          ),
+          payload: Array.from(
+            new Set([...messagesToAdd, ...(prevMessages.payload ?? [])]),
+          ).slice(0, 100),
           errors: newMessages.errors,
           timestamp: newMessages.timestamp,
         };
@@ -170,7 +168,7 @@ export function ConnectedMessagesTable({
 
   switch (true) {
     case messages.errors !== undefined:
-      return <NoDataErrorState errors={messages.errors}/>;
+      return <NoDataErrorState errors={messages.errors} />;
     case messages.payload === undefined:
       return (
         <MessagesTableSkeleton
@@ -205,7 +203,6 @@ export function ConnectedMessagesTable({
             onSelectMessage={setSelected}
             onDeselectMessage={deselectMessage}
             onReset={onReset}
-            baseurl={baseurl}
           >
             {limit === "continuously" && (
               <Refresher
@@ -246,28 +243,25 @@ function Refresher({
     let t: ReturnType<typeof setInterval> | undefined;
 
     async function appendMessages() {
-      const response = await getTopicMessages(
-        kafkaId,
-        topicId,
-        {
-          pageSize: 50,
-          query,
-          where,
-          partition,
-          filter: {
-            type: "timestamp",
-            value: previousTs.current,
-          },
+      const response = await getTopicMessages(kafkaId, topicId, {
+        pageSize: 50,
+        query,
+        where,
+        partition,
+        filter: {
+          type: "timestamp",
+          value: previousTs.current,
         },
-      );
+      });
       if (!response.errors) {
-        const sortedMessages = response.payload
-          ?.sort(
-            (a, b) =>
-              new Date(b.attributes.timestamp).getTime() -
-              new Date(a.attributes.timestamp).getTime(),
-          )
-          .sort((a, b) => b.attributes.offset - a.attributes.offset) ?? [];
+        const sortedMessages =
+          response.payload
+            ?.sort(
+              (a, b) =>
+                new Date(b.attributes.timestamp).getTime() -
+                new Date(a.attributes.timestamp).getTime(),
+            )
+            .sort((a, b) => b.attributes.offset - a.attributes.offset) ?? [];
         return {
           payload: sortedMessages,
           timestamp: response.timestamp,

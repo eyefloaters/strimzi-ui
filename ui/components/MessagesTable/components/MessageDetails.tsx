@@ -37,6 +37,7 @@ import { NoData } from "./NoData";
 import { maybeJson } from "./utils";
 import { getSchema } from "@/api/schema/action";
 import { SchemaValue } from "./SchemaValue";
+import { ExternalLink } from "@/components/Navigation/ExternalLink";
 
 export type MessageDetailsProps = {
   onClose: () => void;
@@ -225,7 +226,17 @@ export function MessageDetailsBody({
               {valueSchemaContent && (
                 <StackItem>
                   <Title headingLevel={"h4"}>
-                    {message.relationships.valueSchema?.meta?.name}
+                    {message.relationships.valueSchema?.meta?.name &&
+                    message.relationships.valueSchema?.links?.content ? (
+                      <ExternalLink
+                        testId="schema-value"
+                        href={`/schema?content=${encodeURIComponent(message.relationships.valueSchema.links.content)}&schemaname=${encodeURIComponent(message.relationships.valueSchema.meta.name)}`}
+                      >
+                        {message.relationships.valueSchema.meta.name}
+                      </ExternalLink>
+                    ) : (
+                      message.relationships.valueSchema?.meta?.name
+                    )}
                   </Title>
                   <SchemaValue
                     schema={valueSchemaContent}
@@ -262,7 +273,19 @@ export function MessageDetailsBody({
               {keySchemaContent && (
                 <StackItem>
                   <Title headingLevel={"h4"}>
-                    {message.relationships.keySchema?.meta?.name}
+                    {message.relationships.keySchema?.meta?.name &&
+                    message.relationships.keySchema?.links?.content ? (
+                      <ExternalLink
+                        testId={"key-schema"}
+                        href={`/schema?content=${encodeURIComponent(message.relationships.keySchema?.links?.content)}&schemaname=${encodeURIComponent(
+                          message.relationships.keySchema?.meta?.name,
+                        )}`}
+                      >
+                        {message.relationships.keySchema?.meta?.name}
+                      </ExternalLink>
+                    ) : (
+                      message.relationships.keySchema?.meta?.name
+                    )}
                   </Title>
                   <SchemaValue
                     schema={keySchemaContent}
