@@ -25,7 +25,6 @@ export type ConnectedConsumerGroupTableProps = {
   baseurl: string;
   nextPageCursor: string | null | undefined;
   prevPageCursor: string | null | undefined;
-  refresh: (() => Promise<ConsumerGroup[]>) | undefined;
 };
 
 type State = {
@@ -50,7 +49,6 @@ export function ConnectedConsumerGroupTable({
   nextPageCursor,
   prevPageCursor,
   kafkaId,
-  refresh,
 }: ConnectedConsumerGroupTableProps) {
   const router = useRouter();
   const _updateUrl = useFilterParams({ perPage, sort, sortDir });
@@ -172,7 +170,6 @@ export function ConnectedConsumerGroupTable({
         }}
         onClearAllFilters={clearFilters}
         kafkaId={kafkaId}
-        refresh={refresh}
         onResetOffset={(row) => {
           startTransition(() => {
             if (row.attributes.state === "STABLE") {
