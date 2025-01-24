@@ -54,8 +54,7 @@ export function ConsumerGroupsTable({
   page,
   perPage,
   total,
-  consumerGroups: initialData,
-  refresh,
+  consumerGroups,
   isColumnSortable,
   filterName,
   filterState,
@@ -72,31 +71,17 @@ export function ConsumerGroupsTable({
   filterName: string | undefined;
   filterState: ConsumerGroupState[] | undefined;
   consumerGroups: ConsumerGroup[] | undefined;
-  refresh: (() => Promise<ConsumerGroup[]>) | undefined;
   onFilterNameChange: (name: string | undefined) => void;
-  onFilterStateChange: (status: ConsumerGroupState[] | undefined) => void;
+  onFilterStateChange: (state: ConsumerGroupState[] | undefined) => void;
   onResetOffset: (consumerGroup: ConsumerGroup) => void;
 } & Pick<
   TableViewProps<ConsumerGroup, (typeof ConsumerGroupColumns)[number]>,
   "isColumnSortable" | "onPageChange" | "onClearAllFilters"
 >) {
   const t = useTranslations();
-  const [consumerGroups, setConsumerGroups] = useState(initialData);
-  useEffect(() => {
-    let interval: ReturnType<typeof setInterval>;
-    if (refresh) {
-      interval = setInterval(async () => {
-        const consumerGroups = await refresh();
-        if (consumerGroups) {
-          setConsumerGroups(consumerGroups);
-        }
-      }, 5000);
-    }
-    return () => clearInterval(interval);
-  }, [refresh]);
   return (
     <TableView
-      itemCount={consumerGroups?.length}
+      itemCount={total}
       page={page}
       perPage={perPage}
       onPageChange={onPageChange}
@@ -263,8 +248,8 @@ export function ConsumerGroupsTable({
             onFilterStateChange(newState);
           },
           onRemoveChip: (state) => {
-            const newStatus = (filterState || []).filter((s) => s !== state);
-            onFilterStateChange(newStatus);
+            const newState = (filterState || []).filter((s) => s !== state);
+            onFilterStateChange(newState);
           },
           onRemoveGroup: () => {
             onFilterStateChange(undefined);
