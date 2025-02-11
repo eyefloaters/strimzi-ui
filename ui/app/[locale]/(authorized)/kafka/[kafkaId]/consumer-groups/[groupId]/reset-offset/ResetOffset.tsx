@@ -1,12 +1,7 @@
 import {
-  Divider,
   Panel,
-  PanelHeader,
   PanelMain,
   PanelMainBody,
-  TextContent,
-  Text,
-  TextVariants,
   Radio,
   Form,
   FormGroup,
@@ -14,7 +9,9 @@ import {
   TextInput,
   ActionGroup,
   Button,
-  Alert,
+  FormHelperText,
+  HelperText,
+  HelperTextItem,
 } from "@/libs/patternfly/react-core";
 import { useTranslations } from "next-intl";
 import {
@@ -26,6 +23,7 @@ import {
 import { TypeaheadSelect } from "./TypeaheadSelect";
 import { DryrunSelect } from "./DryrunSelect";
 import { SelectComponent } from "./SelectComponent";
+import { ExclamationCircleIcon } from "@/libs/patternfly/react-icons";
 
 export type Offset = {
   topicId: string;
@@ -101,7 +99,6 @@ export function ResetOffset({
     <Panel>
       <PanelMain>
         <PanelMainBody>
-          {error && <Alert variant="danger" isInline title={error} />}
           <Form>
             <FormSection title={t("target")}>
               <FormGroup
@@ -215,6 +212,18 @@ export function ResetOffset({
                       type="number"
                       min={0}
                     />
+                    {error && (
+                      <FormHelperText>
+                        <HelperText>
+                          <HelperTextItem
+                            icon={<ExclamationCircleIcon />}
+                            variant={"error"}
+                          >
+                            {t("custom_offset_error_message")}
+                          </HelperTextItem>
+                        </HelperText>
+                      </FormHelperText>
+                    )}
                   </FormGroup>
                 )}
               {selectOffset === "specificDateTime" && (
