@@ -195,8 +195,7 @@ public class ConsumerGroupsResource {
         description = "Consumer group patch dry run successful, nothing was applied",
         content = @Content(schema = @Schema(implementation = ConsumerGroup.ConsumerGroupDocument.class)))
     @APIResponse(responseCode = "204",
-        description = "Consumer group patch successful, changes applied",
-        content = @Content(schema = @Schema(implementation = Void.class)))
+        description = "Consumer group patch successful, changes applied")
     @Expression(
         targetName = "args",
         // Only check when the request body Id is present (separately checked for @NotNull)
