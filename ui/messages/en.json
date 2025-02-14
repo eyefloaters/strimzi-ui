@@ -444,7 +444,8 @@
     "reseting_consumer_group_offsets_text": "Resetting consumer group offsets. This might take a few moments",
     "run_and_show_result": "Run and show result in console",
     "copy_dry_run_command": "Copy Dry Run command to clipboard",
-    "reset_offset_submitted_successfully": "Reset {consumerGroupName} offsets completed successfully"
+    "reset_offset_submitted_successfully": "Reset {consumerGroupName} offsets completed successfully",
+    "custom_offset_error_message": "The custom offset value is out of range. Enter a value between the earliest and latest offsets."
   },
   "CreateTopic": {
     "title": "Topic creation wizard",
